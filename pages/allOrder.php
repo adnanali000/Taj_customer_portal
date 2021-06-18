@@ -38,7 +38,7 @@ if (isset($_SESSION['userid'])) {
           $query = "select ST.SALESID,ST.CUSTACCOUNT, ST.SALESNAME,
                     CASE WHEN ST.SALESSTATUS = 3 THEN 'INVOICED' WHEN ST.SALESSTATUS = 1 THEN 'OPEN ORDER' WHEN ST.SALESSTATUS = 4 THEN 'CANCELLED'  ELSE ' ' END AS 'SALESSTATUS',
                     ST.INVENTSITEID,ST.INVENTLOCATIONID,
-                    ST.CREATEDDATETIME FROM SALESTABLE ST WHERE ST.CUSTACCOUNT = '" . $userid . "'";
+                    ST.CREATEDDATETIME FROM SALESTABLE ST WHERE ST.CUSTACCOUNT = '" . $userid . "' AND ST.SALESSTATUS IN(1,3) " ;
           $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable" => 'static')) or die(sqlsrv_errors());
           $res = sqlsrv_fetch_array($stmt);
           while ($res = sqlsrv_fetch_array($stmt)) {

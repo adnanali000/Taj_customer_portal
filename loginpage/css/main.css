@@ -26,10 +26,10 @@
 } */
 
 
+   
 body{
-  font-family: Arial, Helvetica, sans-serif !important;
-} 
-
+  font-family: 'Neutra Text', sans-serif !important;
+}
 
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
@@ -43,12 +43,16 @@ body{
 body, html {
 	height: 100%;
 	/* font-family: Poppins-Regular, sans-serif; */
+  font-family: 'Neutra Text', sans-serif !important;
+
 }
 
 /*---------------------------------------------*/
 a {
-	font-family: Poppins-Regular;
-	font-size: 14px;
+	/* font-family: Poppins-Regular; */
+  font-family: 'Neutra Text', sans-serif !important;
+
+  font-size: 14px;
 	line-height: 1.7;
 	color: #666666;
 	margin: 0px;
@@ -73,8 +77,9 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 p {
-	font-family: Poppins-Regular;
-	font-size: 14px;
+  font-family: 'Neutra Text', sans-serif !important;
+
+  font-size: 14px;
 	line-height: 1.7;
 	color: #666666;
 	margin: 0px;
@@ -147,7 +152,9 @@ iframe {
 /*//////////////////////////////////////////////////////////////////
 [ Utility ]*/
 .txt1 {
-  font-family: Poppins-Regular;
+  /* font-family: Poppins-Regular; */
+  font-family: 'Neutra Text', sans-serif !important;
+
   font-size: 13px;
   color: #e5e5e5;
   line-height: 1.5;
@@ -238,7 +245,9 @@ iframe {
 }
 
 .login100-form-title {
-  font-family: Poppins-Medium;
+  /* font-family: Poppins-Medium; */
+  font-family: 'Neutra Text', sans-serif !important;
+
   font-size: 30px;
   color: grey;
   line-height: 1.2;
@@ -262,7 +271,9 @@ iframe {
 }
 
 .input100 {
-  font-family: Poppins-Regular;
+  /* font-family: Poppins-Regular; */
+  font-family: 'Neutra Text', sans-serif !important;
+
   font-size: 16px;
   color: black !important;
   /* line-height: 1.2; */
@@ -304,6 +315,8 @@ iframe {
 
 .focus-input100::after {
   font-family: Material-Design-Iconic-Font;
+  /* font-family: 'Neutra Text', sans-serif !important; */
+
   font-size: 22px;
   color: grey !important; 
   content: attr(data-placeholder);
@@ -418,7 +431,9 @@ iframe {
 }
 
 .login100-form-btn {
-  font-family: Poppins-Medium;
+  /* font-family: Poppins-Medium; */
+  font-family: 'Neutra Text', sans-serif !important;
+
   font-size: 16px;
   color: white;
   line-height: 1.2;
@@ -516,7 +531,9 @@ iframe {
   right: 0px;
   pointer-events: none;
 
-  font-family: Poppins-Regular;
+  /* font-family: Poppins-Regular; */
+  font-family: 'Neutra Text', sans-serif !important;
+
   color: #c80000;
   font-size: 13px;
   line-height: 1.4;
@@ -533,7 +550,9 @@ iframe {
 
 .alert-validate::after {
   content: "\f12a";
-  font-family: FontAwesome;
+  /* font-family: FontAwesome; */
+  font-family: 'Neutra Text', sans-serif !important;
+
   font-size: 16px;
   color: #c80000;
 

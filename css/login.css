@@ -1,20 +1,21 @@
-@font-face {
+@font-face { 
     font-family: headingfont !important;
-    src: url("../fonts/Neutra2Display-Titling.otf");
-}
-@font-face {
-    font-family: textfont !important;
-    src: url('../fonts/NeutraText-Book.otf') format("opentype");
+    src: url("../fonts/Neutraface2Display-Titling.otf");
+ }
+    
+body{
+    font-family: 'Neutra Text', sans-serif !important;
 }
 
-body{
-    font-family: textfont !important;
-}
+
 
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 h1,h2,h3,h4,h5,h6{
-    font-family: 'Russo One', sans-serif     !important;
-    font-weight: 700;
+    /* font-family: 'Russo One', sans-serif     !important; */
+    /* font-family: 'Neutra Text', sans-serif !important; */
+    /* font-weight: 700; */
+    font-family: 'Neutra Display' !important;
+
 }
 .navbar-brand img{
     width:50px !important;
@@ -60,11 +61,14 @@ h1,h2,h3,h4,h5,h6{
     color: white;
     margin-top: -60px;
 }
-
+@import url(//db.onlinewebfonts.com/c/0d2703af1d063ee7547a5e8a189bdb8f?family=Neutraface+2+Display+Inline);
+@font-face {font-family: "Neutraface 2 Display Inline"; src: url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.eot"); src: url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.woff") format("woff"), url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.svg#Neutraface 2 Display Inline") format("svg"); }
 .message h3{
 
     line-height: 1.5;
     font-size: 40px;
+    font-family: "Neutraface 2 Display Inline" !important;
+    /* font-weight: 800; */
 }
 
 .message button{

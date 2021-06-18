@@ -33,6 +33,8 @@ if (isset($_SESSION['userid'])) {
     <link rel="stylesheet" href="../assets/DataTables2/Buttons-1.7.1/css/buttons.bootstrap4.css">
     <link rel="stylesheet" href="../assets/DataTables2/Buttons-1.7.1/css/buttons.dataTables.css">
     <link rel="stylesheet" href="../assets/DataTables2/DataTables-1.10.25/css/jquery.dataTables.min.css">
+	<link href="http://fonts.cdnfonts.com/css/neutra-text-alt" rel="stylesheet">
+
 
   </head>
 

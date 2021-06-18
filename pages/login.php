@@ -65,7 +65,8 @@
 	<link rel="stylesheet" type="text/css" href="../loginpage/css/main.css">
 <!--===============================================================================================-->
     <link rel="stylesheet" href="../css/login.css">
-
+	<link href="http://fonts.cdnfonts.com/css/neutra-text-alt" rel="stylesheet">
+	<link href="//db.onlinewebfonts.com/c/0d2703af1d063ee7547a5e8a189bdb8f?family=Neutraface+2+Display+Inline" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 	

@@ -34,6 +34,10 @@ if (isset($_SESSION['userid'])) {
     <link rel="stylesheet" href="../assets/DataTables2/Buttons-1.7.1/css/buttons.dataTables.css">
     <link rel="stylesheet" href="../assets/DataTables2/DataTables-1.10.25/css/jquery.dataTables.min.css">
 	<link href="http://fonts.cdnfonts.com/css/neutra-text-alt" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/font-awesome-4.7.0/css/font-awesome.css">
+
 
 
   </head>
@@ -42,7 +46,7 @@ if (isset($_SESSION['userid'])) {
                                                 <!-- navbar -->
     <div class="container-fluid">
       <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="./home.php">
           <img src="../icon//login.png" alt="" class="d-inline-block">
           <span class="title mt-3"></span>
         </a>
@@ -70,8 +74,20 @@ if (isset($_SESSION['userid'])) {
       </nav>
 
                                             <!-- second nav  -->
+    <?php 
 
-      <nav class="navbar  mt-2 border-bottom-0 mb-3 navbar-expand-lg navbar-light bg-white">
+$query = "select sum(ct.amountmst) as 'Balance', c.CREDITMAX as 'Credit_Limit' from custtrans as ct
+inner join CUSTTABLE as c on c.ACCOUNTNUM = ct.ACCOUNTNUM
+where ct.accountnum = '".$userid."'
+group by c.CREDITMAX;
+";
+        $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
+        $res = sqlsrv_fetch_array($stmt);
+        // print_r(number_format($res['Balance'],2));
+     ?>
+
+
+      <nav class="navbar  mt-2 border-bottom-0 mb-3 navbar-expand-lg navbar-light bg-white" id="nav2">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -96,7 +112,12 @@ if (isset($_SESSION['userid'])) {
               </div>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link ml-1 dropdown-toggle text-black" href="./customerbalance.php" target="_blank" id="navbarDropdown" role="button">
+              <a class="nav-link ml-1 dropdown-toggle text-black" href="./customertransaction.php"  id="navbarDropdown" role="button">
+                Customer Transaction
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link ml-1 dropdown-toggle text-black" id="balance"  target="_blank" id="navbarDropdown" role="button">
                 Customer Balance
               </a>
             </li>
@@ -113,15 +134,35 @@ if (isset($_SESSION['userid'])) {
     <script src="../assets/DataTables2/Buttons-1.7.1/js/dataTables.buttons.js"></script>
     <script src="../assets/DataTables2/Buttons-1.7.1/js/buttons.dataTables.js"></script>
     <script src="../assets/DataTables2/DataTables-1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
       $(document).ready(function() {
         $("#tab").DataTable({
           language: {
             search: "",
-            searchPlaceholder: "Search..."
+            searchPlaceholder: "Search...",
+            lengthMenu:     "Show _MENU_ Entries"
           },
+          
         });
+      
+      
+      
+      
       })
+
+    
+      let balance = document.getElementById('balance');
+      balance.addEventListener("click",function(){ 
+          Swal.fire({html:'Balance:  <?= number_format( $res["Balance"],2);?> <br><br>  Credit Limit: <?= number_format( $res["Credit_Limit"],2);?>',
+                    confirmButtonText:'Close'});
+      })
+      
+        
+     
+        
+      
+  
     </script>
   </body>
 

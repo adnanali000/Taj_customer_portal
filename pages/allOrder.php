@@ -29,7 +29,7 @@ if (isset($_SESSION['userid'])) {
             <th scope="col">Sales Status</th>
             <th scope="col">Invent Site Id</th>
             <th scope="col">Invent Location Id</th>
-            <th scope="col">Created DateTime</th>
+            <th scope="col">Created Date</th>
           </tr>
         </thead>
         <tbody>
@@ -49,7 +49,7 @@ if (isset($_SESSION['userid'])) {
               <td class="text-danger"><?php echo $res['SALESSTATUS']; ?></td>
               <td><?php echo $res['INVENTSITEID']; ?></td>
               <td><?php echo $res['INVENTLOCATIONID']; ?></td>
-              <td><?php echo $res['CREATEDDATETIME']->format('Y-m-d H:i:s') ?></td>
+              <td><?php echo $res['CREATEDDATETIME']->format('Y-m-d') ?></td>
 
             </tr>
           <?php

@@ -42,6 +42,7 @@ body{
 
 body, html {
 	height: 100%;
+  overflow: hidden !important;
 	/* font-family: Poppins-Regular, sans-serif; */
   font-family: 'Neutra Text', sans-serif !important;
 
@@ -180,7 +181,7 @@ iframe {
   flex-wrap: wrap;
   /* justify-content: center; */
   /* align-items: center; */
-  padding: 15px;
+  /* padding: 15px; */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -209,7 +210,9 @@ iframe {
   margin: 0px auto;
   margin-left: 200px;
   padding: 20px;
-  margin-bottom: 60px;
+  margin-top: 160px !important;
+  /* margin-top:150px !important; */
+  /* margin-bottom: 60px !important; */
   height: 350px !important;
   background: white !important;
   background: -webkit-linear-gradient(top, white,white) !important;

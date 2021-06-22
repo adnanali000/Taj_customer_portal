@@ -48,7 +48,7 @@ if (isset($_SESSION['userid'])) {
               <td class="text-danger"><?php echo $res['SALESSTATUS']; ?></td>
               <td><?php echo $res['INVENTSITEID']; ?></td>
               <td><?php echo $res['INVENTLOCATIONID']; ?></td>
-              <td><?php echo $res['CREATEDDATETIME']->format('Y-m-d H:i:s') ?></td>
+              <td><?php echo $res['CREATEDDATETIME']->format('Y-m-d') ?></td>
 
             </tr>
           <?php

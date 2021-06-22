@@ -7,9 +7,7 @@
     src: url('../fonts/NeutraText-Book.otf') format("opentype");
 }
 
-/* body{
-    font-family: textfont !important;
-} */
+
 body{
     font-family: 'Neutra Text', sans-serif !important;
 }
@@ -65,6 +63,8 @@ tbody:hover{
 .table{
     border:none !important;
 }
+
+
 .dropdown-menu{
     display: none !important;
 }
@@ -126,6 +126,14 @@ tbody:hover{
     text-align: center !important;
 }
 
+/* .dataTables_wrapper .dataTables_filter input:focus{
+    border: none !important;
+} */
+
+.dataTables_filter input {
+    color: grey;
+  }
+
 .paginate_button{
     color: grey;
     background: #eff6ee;
@@ -180,4 +188,17 @@ tbody:hover{
         width: 90px;
         height: 75px;
     }
+  }
+
+  .swal2-title{
+      font-size: 20px !important;
+      font-family: 'Neutra Text', sans-serif !important;
+  }
+  .swal2-styled.swal2-confirm{
+    /* width: 50px !important; */
+    /* height: 30px !important; */
+    font-size: 14px !important;
+    background-color: #ED1C24 !important;
+    border-radius:0px !important;
+    font-family: 'Neutra Text', sans-serif !important;
   }

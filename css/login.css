@@ -43,10 +43,14 @@ h1,h2,h3,h4,h5,h6{
 .navli img{
     /* margin-left: 30px; */
     /* margin-top: 10px; */
-    margin-left: 15px !important;
+    /* margin-left: 15px !important; */
     width:70px !important;
     height:60px !important;
-    margin-top: -5px;
+    /* margin-top: 5px; */
+    margin-left: 15px;
+    margin-bottom: 3px;
+    margin-top: 3px;
+
 }
 .portal{
     margin-right: 15px !important;
@@ -55,11 +59,12 @@ h1,h2,h3,h4,h5,h6{
 }
 .message{
     /* border: 1px solid black; */
-    height: 200px;
+    height: 150px;
     width:350px;
     margin-left: 60px;
     color: white;
-    margin-top: -60px;
+    /* margin-bottom: 60px; */
+    
 }
 @import url(//db.onlinewebfonts.com/c/0d2703af1d063ee7547a5e8a189bdb8f?family=Neutraface+2+Display+Inline);
 @font-face {font-family: "Neutraface 2 Display Inline"; src: url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.eot"); src: url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.woff") format("woff"), url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.svg#Neutraface 2 Display Inline") format("svg"); }
@@ -84,8 +89,8 @@ h1,h2,h3,h4,h5,h6{
     /* border: 1px solid black; */
     width:120px;
     height:50px;
-    margin-top: 300px;
-    margin-left: 170px;
+    margin-top: 370px;
+    margin-left: 180px;
 }
 
 .formbut button{
@@ -156,3 +161,15 @@ h1,h2,h3,h4,h5,h6{
         height: 350px !important;
       }
 }
+/* .swal-modal{
+ width: 300px !important;
+ height: 200px !important;
+}
+.swal-title{
+    font-weight: 300 !important;
+    padding: 6px 9px !important;
+    font-size: 16px !important;
+}
+.swal-icon--error{
+
+} */

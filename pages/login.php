@@ -1,37 +1,3 @@
-<?php
- include('./conn.php');
-
- if(isset($_POST['submit'])){
- 
-	 $userid = htmlentities($_POST['userid'],ENT_QUOTES);
-	 $password = htmlentities($_POST['password'],ENT_QUOTES);
- 
-	 $query = "select CT.ACCOUNTNUM,DPT.NAME,CT.[PASSWORD],CT.CONFIRMPW
-								 FROM CUSTTABLE CT
-								 INNER JOIN DIRPARTYTABLE DPT ON CT.PARTY = DPT.RECID
-								 where CT.ACCOUNTNUM = '".$userid."' and CT.[PASSWORD] = '".$password."' and CT.CONFIRMPW='".$password."' ";
-	$stmt = sqlsrv_query($conn, $query,array(),array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
-	$stmt ? "success" : "invalid";								 
-	//DIE(print_r(sqlsrv_errors(), true));
-	$num = sqlsrv_num_rows($stmt);
-	if($num==1){
-		 session_start();
-		 while($res = sqlsrv_fetch_array($stmt)){
-			 $_SESSION['userid']=$res['ACCOUNTNUM'];
-			 header('location: home.php');
-		 }
-		//print_r($res);
-	 }else{
-		 echo "failed";
-	 }
- }
- 
- ?>
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,9 +32,41 @@
 <!--===============================================================================================-->
     <link rel="stylesheet" href="../css/login.css">
 	<link href="http://fonts.cdnfonts.com/css/neutra-text-alt" rel="stylesheet">
+	<link rel="stylesheet" href="../assets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/font-awesome-4.7.0/css/font-awesome.css">
 	<link href="//db.onlinewebfonts.com/c/0d2703af1d063ee7547a5e8a189bdb8f?family=Neutraface+2+Display+Inline" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
+
+<?php
+ include('./conn.php');
+ if(isset($_POST['submit'])){
+ 
+	 $userid = htmlentities($_POST['userid'],ENT_QUOTES);
+	 $password = htmlentities($_POST['password'],ENT_QUOTES);
+ 
+	 $query = "select CT.ACCOUNTNUM,DPT.NAME,CT.[PASSWORD],CT.CONFIRMPW
+								 FROM CUSTTABLE CT
+								 INNER JOIN DIRPARTYTABLE DPT ON CT.PARTY = DPT.RECID
+								 where CT.ACCOUNTNUM = '".$userid."' and CT.[PASSWORD] = '".$password."' and CT.CONFIRMPW='".$password."' ";
+	$stmt = sqlsrv_query($conn, $query,array(),array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
+	$stmt ? "success" : "invalid";								 
+	//DIE(print_r(sqlsrv_errors(), true));
+	$num = sqlsrv_num_rows($stmt);
+	if($num==1){
+		 session_start();
+		 while($res = sqlsrv_fetch_array($stmt)){
+			 $_SESSION['userid']=$res['ACCOUNTNUM'];
+			 header('location: home.php');
+		 }
+		//print_r($res);
+	 }else{
+		echo '<div class="alert alert-danger bg-white text-center text-danger mb-1 text-large"  role="alert"><i class="fas fa-close" style="color:red;margin:5px;font-size:20px;margin-top:5px;"></i>Wrong Password</div>';
+	 }
+ }
+ 
+ ?>
 	
 	<div class="limiter">
 		<div class="container-login100" id="bgImage" style="background-image: url('../icon/bg-image.jpg');">
@@ -127,6 +125,7 @@
 	</div>
 	<div id="dropDownSelect1"></div>
 	
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 <!--===============================================================================================-->
 	<script src="../loginpage/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -145,6 +144,8 @@
 	<script src="../loginpage/js/main.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="../js/script.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
 
 </body>
 </html>

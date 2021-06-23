@@ -104,12 +104,12 @@ group by c.CREDITMAX;
               </div>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link ml-1 dropdown-toggle text-black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Reports
+              <a class="nav-link ml-1 dropdown-toggle text-black" href="http://192.168.0.44/ReportServer/Pages/ReportViewer.aspx?%2fAXReports%2fpartycustomerledgernew&rs:Command=Render&GC=<?=$_SESSION['userid'];?>" target="_blank" id="navbarDropdown" role="button" >
+                Ledger Reports
               </a>
-              <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Ledger Report</a>
-              </div>
+              <!-- <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="http://192.168.0.44/ReportServer/Pages/ReportViewer.aspx?%2fAXReports%2fpartycustomerledgernew&rs:Command=Render&GC=<?=$_SESSION['userid'];?>" target="_blank"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Ledger Report</a>
+              </div> -->
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link ml-1 dropdown-toggle text-black" href="./customertransaction.php"  id="navbarDropdown" role="button">

@@ -143,7 +143,7 @@ $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable"=>'static')) or D
           })
         })
 
-        //date work
+        //date summary work
 
         let submit = document.getElementById('submit').innerText;
         let schedule = document.getElementById('schedule').innerText;
@@ -189,7 +189,8 @@ $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable"=>'static')) or D
         }
        
         
-        // backgroundcolor 
+        // summary background color
+         
         if(invoice){
           $('#bginvoice').addClass('bg-gray-100 border-indigo-500');
         }else if(deliver){
@@ -201,11 +202,6 @@ $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable"=>'static')) or D
         }else if(submit){
           $('#bgsubmit').addClass('bg-gray-100 border-indigo-500');
         }
-
-        
-        
-        
-
 
     </script>
 </body>

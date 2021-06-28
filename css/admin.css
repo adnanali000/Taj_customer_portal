@@ -1,0 +1,24 @@
+body{
+    font-family: 'Neutra Text', sans-serif !important;
+   }
+    #sidebar ul li a{
+      color:#746F6D !important;
+    }
+    #sidebar ul li a:hover{
+      border-bottom:1px solid red !important;
+    }
+    #sidebar{
+      background: white !important;
+    }
+    .btn.btn-primary{
+      background:#ED1C24 !important;
+      border-color:#c7aaab !important;
+    }
+    .btn.btn-primary:hover{
+      background:#ED1C24 !important;
+      border-color:#ED1C24 !important;
+    }
+    #sidebar .logo{
+      height:85px !important;
+      width:100px !important;
+    }

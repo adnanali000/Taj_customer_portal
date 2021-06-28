@@ -8,10 +8,8 @@
                             "PWD" => $userPassword,
                             "Database"=> $database);
     $conn = sqlsrv_connect($serverName,$connectionInfo);
-    // if($conn){
-    //     echo "connection successfully done";
-    // }else{
-    //     echo "connection failed";
-    // }
+    if(!$conn){
+        echo "<script>alert('Oops connection Problem')</script>";
+    }
 
 ?>

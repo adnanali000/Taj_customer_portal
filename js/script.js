@@ -21,27 +21,56 @@ function hide(){
 $(document).ready(function(){
 
     $("#id").blur(function(){
+        
         var idvalue = $(this).val();
-        $.ajax({
-            url: "actionUsername.php",
-            method: "GET",
-            data: {idvalue:idvalue},
-            success: function(data){
-                if(data == ""){
-                    $("#btnlogin").prop("disabled",true);
-                    $("#pas").prop("disabled",true);
-                    swal("Attention","Invalid Customer ID","error");
-                }else{
-                    $("#name").val(data);
-                    $("#btnlogin").prop("disabled",false);
-                    $("#pas").prop("disabled",false);
 
+        // checking hidden field value
+        var checkCustomer = $("#checkCustomer").val();
+        var checkAdmin = $("#checkAdmin").val();
+
+        // alert(checkCustomer + " - " + checkAdmin)
+
+        if(checkAdmin == 1){
+            $.ajax({
+                url: "actionadmin.php",
+                method: "GET",
+                data: {idvalue:idvalue},
+                success: function(data){
+                    if(data == ""){
+                        $("#btnlogin").prop("disabled",true);
+                        $("#pas").prop("disabled",true);
+                        // alert(data);
+                        swal("Attention","Invalid admin ID","error");
+                    }else{
+                        $("#name").val(data);
+                        $("#btnlogin").prop("disabled",false);
+                        $("#pas").prop("disabled",false);
+    
+                    }
                 }
-            }
-        })
+            });
+        }else if(checkCustomer == 0){
+            $.ajax({
+                url: "actionUsername.php",
+                method: "GET",
+                data: {idvalue:idvalue},
+                success: function(data){
+                    if(data == ""){
+                        $("#btnlogin").prop("disabled",true);
+                        $("#pas").prop("disabled",true);
+                        swal("Attention","Invalid Customer ID","error");
+                    }else{
+                        $("#name").val(data);
+                        $("#btnlogin").prop("disabled",false);
+                        $("#pas").prop("disabled",false);
+    
+                    }
+                }
+            });
+        }else{
 
+        }
+       
     })
-
-
 
 });

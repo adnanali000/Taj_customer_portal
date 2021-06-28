@@ -43,27 +43,66 @@
  include('./conn.php');
  if(isset($_POST['submit'])){
  
-	 $userid = htmlentities($_POST['userid'],ENT_QUOTES);
-	 $password = htmlentities($_POST['password'],ENT_QUOTES);
- 
-	 $query = "select CT.ACCOUNTNUM,DPT.NAME,CT.[PASSWORD],CT.CONFIRMPW
+	$userid = htmlentities($_POST['userid'],ENT_QUOTES);
+	$password = htmlentities($_POST['password'],ENT_QUOTES);
+	$checkUser = htmlentities($_POST['checkUser'], ENT_QUOTES);
+
+	// testing user for [ admin or customer ]
+	// following query will provide all admin records
+	$testQuery = "select ui.NETWORKALIAS,ui.NAME, ui.[PASSWORD] 
+	from userinfo as ui
+	where ui.[ENABLE] = 1 
+	and ui.[PASSWORD] is not null 
+	and ui.NETWORKALIAS = '".$userid."' and ui.[Password] = '".$password."' ;";
+
+	$stmt3 = sqlsrv_query($conn, $testQuery, array(), array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
+	$rowsReturned = sqlsrv_num_rows($stmt3);
+	if($rowsReturned == 1){
+		// Admin Access
+		$query2 = "select UI.NETWORKALIAS,UI.NAME,UI.PASSWORD from USERINFO AS UI where UI.NETWORKALIAS = '".$userid."' and UI.PASSWORD = '". $password."' ";
+		$stmt2 = sqlsrv_query($conn, $query2,array(),array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
+		//$stmt2 ? "success" : "invalid";
+		$num2 = sqlsrv_num_rows($stmt2);
+		if( $num2 == 1){
+			session_start();
+			while($res2 = sqlsrv_fetch_array($stmt2)){
+				$_SESSION['userid'] = $res2['NETWORKALIAS'];
+				header('location: admin.php');
+			}
+		}else{
+			echo '<div class="alert alert-danger bg-white text-center text-danger mb-1 text-large"  role="alert"><i class="fas fa-close" style="color:red;margin:5px;font-size:20px;margin-top:5px;"></i>Wrong Admin Password</div>';	
+		}
+	//}else if( $rowsReturned == 0){
+
+	}else{
+		// if no record found then generate error because user does not have password
+		// customer
+		$query = "select CT.ACCOUNTNUM,DPT.NAME,CT.[PASSWORD],CT.CONFIRMPW
 								 FROM CUSTTABLE CT
 								 INNER JOIN DIRPARTYTABLE DPT ON CT.PARTY = DPT.RECID
 								 where CT.ACCOUNTNUM = '".$userid."' and CT.[PASSWORD] = '".$password."' and CT.CONFIRMPW='".$password."' ";
-	$stmt = sqlsrv_query($conn, $query,array(),array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
-	$stmt ? "success" : "invalid";								 
-	//DIE(print_r(sqlsrv_errors(), true));
-	$num = sqlsrv_num_rows($stmt);
-	if($num==1){
-		 session_start();
-		 while($res = sqlsrv_fetch_array($stmt)){
-			 $_SESSION['userid']=$res['ACCOUNTNUM'];
-			 header('location: home.php');
-		 }
-		//print_r($res);
-	 }else{
-		echo '<div class="alert alert-danger bg-white text-center text-danger mb-1 text-large"  role="alert"><i class="fas fa-close" style="color:red;margin:5px;font-size:20px;margin-top:5px;"></i>Wrong Password</div>';
-	 }
+		$stmt = sqlsrv_query($conn, $query,array(),array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
+		//$stmt ? "success" : "invalid";								 
+		$num = sqlsrv_num_rows($stmt);
+		if( $num == 1){
+			session_start();
+			while($res = sqlsrv_fetch_array($stmt)){
+				$_SESSION['userid']=$res['ACCOUNTNUM'];
+				header('location: home.php');
+			}
+		}else{
+			echo '<div class="alert alert-danger bg-white text-center text-danger mb-1 text-large"  role="alert"><i class="fas fa-close" style="color:red;margin:5px;font-size:20px;margin-top:5px;"></i>Wrong Customer Password</div>';	
+		}
+	}
+
+
+	// if($userid == 'Nawal.Syed'){
+	// 	//admin
+			
+	// }else{
+		
+		
+	// }
  }
  
  ?>
@@ -97,7 +136,13 @@
 					<!-- <span class="login100-form-title p-b-34 p-t-27">
 						Log in
 					</span> -->
-
+					<!-- <div class="form-check">
+  					<input class="form-check-input" type="checkbox" name="check" value="" id="check">
+  					<label class="form-check-label" for="check">
+    				Admin
+  					</label>
+					</div>
+					 -->
 					<div class="wrap-input100 validate-input" id="inp" data-validate = "Enter user id">
 						<input class="input100" type="text" name="userid" placeholder="User ID" id="id" >
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
@@ -112,12 +157,15 @@
 						<input class="input100" type="password" id="pas" name="password" placeholder="Password">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
-                   
+                  
 					<div class="container-login100-form-btn">
 						<button type="submit" id="btnlogin" class="login100-form-btn" name="submit">
 							Login
 						</button>
 					</div>
+
+					 <input type="hidden" name="checkUser" id="checkCustomer" value="0" />
+					 <input type="hidden" name="checkUser" id="checkAdmin" value="1" />
 
 				</form>
 			</div>

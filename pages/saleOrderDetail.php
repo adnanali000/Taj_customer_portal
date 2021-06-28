@@ -94,7 +94,7 @@ $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable"=>'static')) or D
         <i class="fas fa-check" style="color:green;margin:5px;font-size:22px;" id="del"></i> Delivered <p id="deliver"></p>
       </a>
       <a class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium   items-center leading-none  text-indigo-500 tracking-wider rounded-t" id="bginvoice">
-        <i class="fas fa-close" style="color:red;margin:5px;font-size:22px;" id="inv"></i> Invoiced <p id="invoice"><?php //echo $res['INVOICEDATE']->format('d-m-Y')?></p>
+        <i class="fas fa-close" style="color:red;margin:5px;font-size:22px;" id="inv"></i> Invoiced <p id="invoice"><?php echo $res['INVOICEDATE']->format('d-m-Y')?></p>
       </a>
     </div>
   </div>

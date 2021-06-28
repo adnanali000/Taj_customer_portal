@@ -74,6 +74,7 @@ if (isset($_SESSION['userid'])) {
     <th scope="col">Debit</th>
     <!-- rec amou   -->
     <th scope="col">Credit</th>
+
     <th scope="col">Balance</th>
 
 
@@ -90,14 +91,12 @@ if (isset($_SESSION['userid'])) {
   ?>
 
     <tr class="text-black text-center">
-      <td><?php echo $res['CustId'];?></td>
-      <td><?php echo $res['OpenAmt'];?></td>
-      <td><?php echo $res['RecvAmt'];?></td>
-      <td><?php echo $res['SalesAmt'];?></td>
-      <td><?php echo $res['OP'];?></td>
       <td><?php echo $res['TransDate']->format('Y-m-d') ?></td>
-      <td><?php echo $res['CustName'];?></td>
       <td><?php echo $res['Voucher'];?></td>
+      <td><?php echo $res['SalesAmt'];?></td>
+      <td><?php echo $res['RecvAmt'];?></td>
+      <td><?php echo $res['OpenAmt'];?></td>
+      <td><?php echo $res['OP'];?></td>
       <td><?php echo $res['InvNo'];?></td>
 
     </tr>

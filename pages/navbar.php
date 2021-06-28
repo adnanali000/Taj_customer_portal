@@ -9,6 +9,7 @@ if (!isset($_SESSION['userid'])) {
 }
 if (isset($_SESSION['userid'])) {
   $userid = $_SESSION['userid'];
+  // header('location:home.php');
 
   if (isset($_SESSION['title'])) {
     $title = $_SESSION['title'];
@@ -93,18 +94,28 @@ group by c.CREDITMAX;
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+              <a class="nav-link ml-1 dropdown-toggle text-black" href="./home.php" id="navbarDropdown" role="button" >
+                Home
+              </a>
+              <!-- <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="http://192.168.0.44/ReportServer/Pages/ReportViewer.aspx?%2fAXReports%2fpartycustomerledgernew&rs:Command=Render&GC=<?=$_SESSION['userid'];?>" target="_blank"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Ledger Report</a>
+              </div> -->
+            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle ml-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Sales Order
               </a>
               <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="./allOrder.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i> All Orders</a>
-                <a class="dropdown-item" href="./home.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Open Orders</a>
+                <a class="dropdown-item" href="./openOrder.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Open Orders</a>
                 <a class="dropdown-item" href="./invoicedOrder.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Invoiced Orders</a>
+                <a class="dropdown-item" href="./orderNow.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Order Now</a>
+
               </div>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link ml-1 dropdown-toggle text-black" href="http://192.168.0.44/ReportServer/Pages/ReportViewer.aspx?%2fAXReports%2fpartycustomerledgernew&rs:Command=Render&GC=<?=$_SESSION['userid'];?>" target="_blank" id="navbarDropdown" role="button" >
+              <a class="nav-link ml-1 dropdown-toggle text-black" href="http://192.168.0.44/ReportServer/Pages/ReportViewer.aspx?%2fAXReports%2fpartycustomerledgernew&rs:Command=Render&GC=<?= urlencode( $_SESSION['userid']);?>" target="_blank" id="navbarDropdown" role="button" >
                 Ledger Reports
               </a>
               <!-- <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">

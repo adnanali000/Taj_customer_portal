@@ -111,6 +111,8 @@ group by c.CREDITMAX;
                 <a class="dropdown-item" href="./openOrder.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Open Orders</a>
                 <a class="dropdown-item" href="./invoicedOrder.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Invoiced Orders</a>
                 <a class="dropdown-item" href="./orderNow.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Order Now</a>
+                <a class="dropdown-item" href="./orderdetail.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Order Detail</a>
+
 
               </div>
             </li>

@@ -30,7 +30,7 @@ $(document).ready(function(){
 
         // alert(checkCustomer + " - " + checkAdmin)
 
-        if(checkAdmin == 1){
+        if(idvalue.includes("TGPL")==false){
             $.ajax({
                 url: "actionadmin.php",
                 method: "GET",
@@ -49,7 +49,7 @@ $(document).ready(function(){
                     }
                 }
             });
-        }else if(checkCustomer == 0){
+        }else if(idvalue){
             $.ajax({
                 url: "actionUsername.php",
                 method: "GET",
@@ -74,3 +74,5 @@ $(document).ready(function(){
     })
 
 });
+
+

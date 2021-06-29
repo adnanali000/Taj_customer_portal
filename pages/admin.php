@@ -1,5 +1,6 @@
 <?php
 include('conn.php');
+include('function.php');
 session_start();
 
 if (!isset($_SESSION['userid'])) {
@@ -30,9 +31,23 @@ if (isset($_SESSION['userid'])) {
     <link rel="stylesheet" href="../adminPanel/sidebar-01/css/style.css">
 	<link href="http://fonts.cdnfonts.com/css/neutra-text-alt" rel="stylesheet">
   <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../assets/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../assets/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/DataTables2/Buttons-1.7.1/css/buttons.bootstrap4.css">
+    <link rel="stylesheet" href="../assets/DataTables2/Buttons-1.7.1/css/buttons.dataTables.css">
+    <link rel="stylesheet" href="../assets/DataTables2/DataTables-1.10.25/css/jquery.dataTables.min.css">
 
 
   </head>
+  <style>
+
+  /* action button css */
+  .action{
+    display: flex;
+    flex-direction: row;
+  }
+  
+  </style>
   <body>
 		
 		<div class="wrapper d-flex align-items-stretch">
@@ -111,7 +126,7 @@ if (isset($_SESSION['userid'])) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Admin</a>
+                    <a class="nav-link" href="#"><?=$userid?></a>
                 </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
@@ -136,14 +151,51 @@ if (isset($_SESSION['userid'])) {
 
   <thead class="head">
     <tr class="table-bordered text-black text-center">
-    <th scope="col">Order Id</th>
-    <th scope="col">Ordered Qty</th>
-      <th scope="col">HoldsFree Qty</th>
-      <th scope="col">Balance</th>
-      <th scope="col">Action</th>
+    <th scope="col">SerialNumber</th>
+    <th scope="col">OrderPrefixID</th>
+    <th scope="col">CustomerID</th>
+    <th scope="col">CustomerName</th>
+    <th scope="col">Product</th>
+    <th scope="col">OrderedQty</th>
+    <th scope="col">HoldsFreeQty</th>
+    <th scope="col">Balance</th>
+    <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
+      
+   <?php
+
+$query = "select ORDERPREFIXID,ORDERCREATEDUSER,
+PRODUCTNAME,REQUIREDQUANTITY 
+from orderedtable";
+$stmt = sqlsrv_query($conn, $query, array(), array("Scrollable" => 'static')) or die(sqlsrv_errors());
+//$res = sqlsrv_fetch_array($stmt);
+$counter = 1;
+// $balance = $res['REQUIREDQUANTITY'] + $holdsFreeQty;
+while ($res = sqlsrv_fetch_array($stmt)) {
+?>
+
+    <tr class="text-black text-center">
+    <td id="serial"><?php echo $counter++;?></td>
+    <td><?php echo $res['ORDERPREFIXID']; ?></td>
+    <td><?php echo $res['ORDERCREATEDUSER']; ?></td>
+    <td width="15%"><?=getName($res['ORDERCREATEDUSER']);?></td>
+    <td><?php echo $res['PRODUCTNAME']; ?></td>
+    <td><?php echo $res['REQUIREDQUANTITY']; ?></td>
+    <td><input type="number" style="border:0.2px solid lightgray;border-radius:3px;text-align:center;" name="holdfree" class="holds"></td>
+    <td class="balance"></td>
+    <td class="action">
+      <button data-id="<?=$res['ORDERPREFIXID'];?>" data-qid="<?= $res['REQUIREDQUANTITY'];?>" class="btn btnEdit"><i class="fa fa-edit" style="color:red;font-size:20px;" id="update"></i></button>
+      <button class="btn btnApprove" disabled><i class="fa fa-check-circle" style="color:red;font-size:20px;"></i></button>
+    </td>    
+
+  </tr>
+<?php
+}
+?> 
+
+
  
   </tbody>
 </table>
@@ -152,10 +204,34 @@ if (isset($_SESSION['userid'])) {
       </div>
 		</div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="../adminPanel/sidebar-01/js/jquery.min.js"></script>
     <script src="../adminPanel/sidebar-01/js/popper.js"></script>
     <script src="../adminPanel/sidebar-01/js/bootstrap.min.js"></script>
     <script src="../adminPanel/sidebar-01/js/main.js"></script>
+    <script src="../assets/DataTables2/Buttons-1.7.1/js/dataTables.buttons.js"></script>
+    <script src="../assets/DataTables2/DataTables-1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="../assets/DataTables2/Buttons-1.7.1/js/buttons.dataTables.js"></script>
+    <script src="../assets/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <script src="../js/admin.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        $("#tab").DataTable({
+          language: {
+            search: "",
+            searchPlaceholder: "Search...",
+            lengthMenu:     "Show _MENU_ Entries"
+          },
+          
+        });
+      
+      
+      
+      
+      })
+      </script>
+
   </body>
 </html>
 <?php } ?>

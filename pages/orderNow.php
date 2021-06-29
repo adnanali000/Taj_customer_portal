@@ -49,8 +49,12 @@ if(isset($_POST['submit'])){
           } 
           else{ 
             echo "<script>
-          Swal.fire('Your Order has been Placed!');
-        </script>";
+                  Swal.fire({text:'Your Order has been Placed check now!'}).then(function(result){
+                    if(result.value){
+                      window.location.href = 'orderdetail.php'
+                    }
+                  });
+                  </script>";
         $lastid = getlastid($newrecid);
         $prefixName = $site."-".$lastid;
         setPrefixId($prefixName,$newrecid);

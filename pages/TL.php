@@ -43,7 +43,7 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 1 ) {
     <link rel="stylesheet" href="../assets/DataTables2/Buttons-1.7.1/css/buttons.bootstrap4.css">
     <link rel="stylesheet" href="../assets/DataTables2/Buttons-1.7.1/css/buttons.dataTables.css">
     <link rel="stylesheet" href="../assets/DataTables2/DataTables-1.10.25/css/jquery.dataTables.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
   </head>
   <style>
@@ -77,11 +77,18 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 1 ) {
   .dataTables_wrapper .dataTables_filter input{
     padding: 1px !important;
     border-radius: 0px !important;
-    border:1px solid red !important;
+    border:1px solid #eff6ee !important;
     text-align: center !important;
 }
 #sidebar li a:hover{
   color: red !important;
+}
+td{
+    text-align: center;
+}
+.status{
+    background-color: white;
+    border: none;
 }
 
 
@@ -131,7 +138,9 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 1 ) {
 	          <li>
               <a href="./adminApprove.php">Approved</a>
 	          </li>
-        
+            <li>
+              <a href="./TL.php">TL</a>
+	          </li>
             <!-- <li>
               <a href="#">Test 4</a>
 	          </li> -->
@@ -185,69 +194,75 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 1 ) {
                           <!-- customer order data  -->
 
 
-                          <div class="container-fluid">
+    <div class="container-fluid">
+
+<!-- <form class="form-inline">
+  <div class="form-group mx-sm-3 mb-5">
+    <label for="tl" class="sr-only">TL</label>
+    <input type="text" class="form-control" id="tl" placeholder="TL">
+  </div>
+  <button type="submit" class="btn btn-danger mb-5">Save</button>
+</form> -->
+
 
 <table class="table table-sm mt-1 table-hover" id="tab">
 
   <thead class="head title" style="font-size: 14px;">
     <tr class="table-bordered text-black text-center">
     <th scope="col">S.No</th>
-    <th scope="col">Order ID</th>
-    <th scope="col">Customer ID</th>
-    <th scope="col">Customer Name</th>
-    <th scope="col">Product</th>
-    <th scope="col">Ordered Qty</th>
-    <th scope="col">HoldFree Qty</th>
-    <th scope="col">Balance</th>
-    <th scope="col" width=12%>Tank Lourry</th>
-    <th scope="col">Action</th>
+    <th scope="col">TL</th>
+    <th scope="col" width=40%>Status</th>
     </tr>
   </thead>
   <tbody>
       
-   <?php
+   <tr>
+    <td class="so">1</td>
+    <td>Petrol</td>
+    <td>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-success active status">
+    <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+  </label>
+  <label class="btn btn-danger status">
+    <input type="radio" name="options" id="option2" autocomplete="off"> Inactive
+  </label>
 
-$query = "select ORDERPREFIXID,ORDERCREATEDUSER,
-PRODUCTNAME,REQUIREDQUANTITY 
-from orderedtable where approvedstatus=0";
-$stmt = sqlsrv_query($conn, $query, array(), array("Scrollable" => 'static')) or die(sqlsrv_errors());
-// $query2="sELECT CARRIERCODE FROM TMSCARRIER WHERE DATAAREAID = 'TGPL' AND ACTIVE = 1";
-// $stmt2 = sqlsrv_query($conn, $query2, array(), array("Scrollable" => 'static')) or die(sqlsrv_errors());
+</div>
+    </td>  
+   </tr>
 
-//$res = sqlsrv_fetch_array($stmt);
-$counter = 1;
-// $balance = $res['REQUIREDQUANTITY'] + $holdsFreeQty;
-while ($res = sqlsrv_fetch_array($stmt)) {
-?>
+   <tr>
+    <td class="so">2</td>
+    <td>CNG</td>
+    <td>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-success active status">
+    <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+  </label>
+  <label class="btn btn-danger status">
+    <input type="radio" name="options" id="option2" autocomplete="off"> Inactive
+  </label>
 
-    <tr class="text-black text-center">
-    <td id="serial" class="num"><?php echo $counter++;?></td>
-    <td><?php echo $res['ORDERPREFIXID']; ?></td>
-    <td style="cursor: pointer;color:blue;" class="credit" data-bid="<?=$res['ORDERCREATEDUSER'];?>"><?php echo $res['ORDERCREATEDUSER']; //getBalance($res['ORDERCREATEDUSER']); ?></td>
-    <td width="15%"><?=getName($res['ORDERCREATEDUSER']);?></td>
-    <td><?php echo $res['PRODUCTNAME']; ?></td>
-    <td class="num"><?php echo $res['REQUIREDQUANTITY']; ?></td>
-    <td class="num"><input type="number" style="border:0.2px solid lightgray;border-radius:3px;text-align:center;" name="holdfree" class="holds"></td>
-    <td class="balance num"></td>
-    <td width=12%>
-    <div class="form-group" class="carrierparent">
-    <select name="carriercode" class="carrier" style="width: 120px;">
-    <option disabled value="-1" selected>  --  Select  --  </option>
-    <?=tlData();?>
-    </select>
-    </div>
-    </td>
+</div>
+    </td>   
+   </tr>
 
+   <tr>
+    <td class="so">3</td>
+    <td>DIESAL</td>
+    <td>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-success active status">
+    <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+  </label>
+  <label class="btn btn-danger status">
+    <input type="radio" name="options" id="option2" autocomplete="off"> Inactive
+  </label>
 
-    <td class="action">
-      <button data-id="<?=$res['ORDERPREFIXID'];?>" data-qid="<?= $res['REQUIREDQUANTITY'];?>" data-toggle="tooltip" data-placement="bottom" title="Edit Record" class="btn btnEdit"><i class="fa fa-edit" style="color:red;font-size:20px;" id="update"></i></button>
-      <button class="btn btnApprove" data-toggle="tooltip" data-placement="bottom" title="Approve" disabled><i class="fa fa-check-circle" style="color:red;font-size:20px;"></i></button>
-    </td>    
-
-  </tr>
-<?php
-}
-?> 
+</div>
+    </td>   
+   </tr>
 
 
  
@@ -269,7 +284,8 @@ while ($res = sqlsrv_fetch_array($stmt)) {
     <script src="../assets/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/admin.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="../js/TL.js"></script>
+
 
     <script>
       $(document).ready(function() {
@@ -286,11 +302,6 @@ while ($res = sqlsrv_fetch_array($stmt)) {
       $('[data-toggle="tooltip"]').tooltip({
       trigger : 'hover'
       })        
-
-      //dropdown select
-      $(".carrier").select2({
-        // dropdownParent:$("#carrierparent")
-      });
       
       })
 

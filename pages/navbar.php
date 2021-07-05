@@ -1,4 +1,5 @@
 <?php
+error_reporting(1);
 include('conn.php');
 include('function.php');
 session_start();
@@ -7,9 +8,20 @@ session_start();
 if (!isset($_SESSION['userid'])) {
   header('location: login.php');
 }
-if (isset($_SESSION['userid'])) {
+
+if($_SESSION['userRole'] == 1){
+  // session_destroy();
+  header("location: admin.php");
+}
+
+// if(isset($_SESSION['userRole']) == 1 ){
+//   header("location: admin.php");
+// }
+
+if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 0 ) {
   $userid = $_SESSION['userid'];
   // header('location:home.php');
+  // print_r($_SESSION);
 
   if (isset($_SESSION['title'])) {
     $title = $_SESSION['title'];
@@ -104,14 +116,14 @@ group by c.CREDITMAX;
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle ml-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Sales Order
+                Order Details
               </a>
               <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="./allOrder.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i> All Orders</a>
                 <a class="dropdown-item" href="./openOrder.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Open Orders</a>
                 <a class="dropdown-item" href="./invoicedOrder.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Invoiced Orders</a>
                 <a class="dropdown-item" href="./orderNow.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Order Now</a>
-                <a class="dropdown-item" href="./orderdetail.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Order Detail</a>
+                <a class="dropdown-item" href="./orderdetail.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Purchase Order</a>
 
 
               </div>
@@ -130,7 +142,7 @@ group by c.CREDITMAX;
               </a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link ml-1 dropdown-toggle text-black" id="balance"  target="_blank" id="navbarDropdown" role="button">
+              <a class="nav-link ml-1 dropdown-toggle text-black"  id="balance"  target="_blank" id="navbarDropdown" role="button">
                 Customer Balance
               </a>
             </li>
@@ -156,6 +168,7 @@ group by c.CREDITMAX;
             searchPlaceholder: "Search...",
             lengthMenu:     "Show _MENU_ Entries"
           },
+          "ordering": false
           
         });
       

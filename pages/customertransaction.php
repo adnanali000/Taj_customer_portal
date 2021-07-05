@@ -11,6 +11,13 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Customer Transaction</title>
  </head>
+ <style>
+     #tab_filter > label > input[type='search']{
+        outline: none;
+        /* border-color: #ED1C24 !important; */
+    /* box-shadow: 0 0 0 0.2rem rgba(245, 10, 10, 0.25) !important; */
+     }
+ </style>
  <body>
      <div class="container-fluid">
 
@@ -31,11 +38,11 @@
     <div class="form-row">
         <div class="form-group col-md-3">
             <label class="col-form-label">Customer Balance :</label>
-            <input type="text" class="form-control" value="<?= number_format( $res["Balance"],2);?>" placeholder="hello" disabled>
+            <input type="text" class="form-control num" value="<?= number_format( $res["Balance"],2);?>" placeholder="hello" disabled>
         </div>
         <div class="form-group col-md-3">
             <label class="col-form-label">Customer Credit_Limit :</label>
-            <input type="text" class="form-control" value="<?= number_format($res["Credit_Limit"],2) ;?>"  placeholder="hello" disabled>
+            <input type="text" class="form-control num" value="<?= number_format($res["Credit_Limit"],2) ;?>"  placeholder="hello" disabled>
         </div>
     </div>
     
@@ -65,8 +72,7 @@
                     (SELECT ABS(CCT.AMOUNTCUR) FROM CUSTTRANS CCT WHERE CCT.TRANSTYPE = 2 AND CCT.RECID = CT.RECID) AS DEBIT,
                     (ABS(CT.AMOUNTCUR)-ABS(CT.SETTLEAMOUNTCUR)) AS BALANCE,CT.CURRENCYCODE
                     FROM CUSTTRANS CT WHERE CT.ACCOUNTNUM = '".$userid."' AND TRANSTYPE IN ('15','2')
-                    ORDER BY CT.TRANSDATE DESC
-                    ";
+                    ORDER BY CT.TRANSDATE DESC";
                   	$stmt = sqlsrv_query($conn, $query, array(), array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
                     $result = sqlsrv_fetch_array($stmt);
                       
@@ -75,12 +81,12 @@
 
                 <tr class="text-black text-center">
                     <td><?php echo $result['VOUCHER'];?></td>
-                    <td><?php echo $result['TRANSTYPE'];?></td>
-                    <td><?php echo $result['TRANSDATE']->format('Y-m-d H:i:s');?></td>
+                    <td ><?php echo $result['TRANSTYPE'];?></td>
+                    <td class="num"><?php echo $result['TRANSDATE']->format('Y-m-d');?></td>
                     <td><?php echo $result['INVOICE'];?></td>
-                    <td><?php echo number_format($result['CREDIT'],2);?></td>
-                    <td><?php echo number_format($result['DEBIT'],2);?></td>
-                    <td><?php echo number_format($result['BALANCE'],2);?></td>
+                    <td class="num"><?php echo number_format($result['CREDIT'],2);?></td>
+                    <td class="num"><?php echo number_format($result['DEBIT'],2);?></td>
+                    <td class="num"><?php echo number_format($result['BALANCE'],2);?></td>
                     <td><?php echo $result['CURRENCYCODE'];?></td>
 
                 </tr>
@@ -90,6 +96,13 @@
     </tbody>
     </table> 
 </div>
-     
+     <script type="text/javascript">
+        $(document).ready(function(){
+            // $("#tab_filter > label > input[type='search']").click(function(){
+                
+            //     $(this).prop({"background": "red !important"});
+            // });
+        })
+    </script>
  </body>
  </html>

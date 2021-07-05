@@ -67,6 +67,7 @@
 			session_start();
 			while($res2 = sqlsrv_fetch_array($stmt2)){
 				$_SESSION['userid'] = $res2['NETWORKALIAS'];
+				$_SESSION['userRole'] = 1;
 				header('location: admin.php');
 			}
 		}else{
@@ -77,7 +78,7 @@
 	}else{
 		// if no record found then generate error because user does not have password
 		// customer
-		$query = "select CT.ACCOUNTNUM,DPT.NAME,CT.[PASSWORD],CT.CONFIRMPW
+		$query = "select CT.ACCOUNTNUM,DPT.NAME,CT.[PASSWORD],CT.CONFIRMPW,CT.CustSite
 								 FROM CUSTTABLE CT
 								 INNER JOIN DIRPARTYTABLE DPT ON CT.PARTY = DPT.RECID
 								 where CT.ACCOUNTNUM = '".$userid."' and CT.[PASSWORD] = '".$password."' and CT.CONFIRMPW='".$password."' ";
@@ -88,6 +89,8 @@
 			session_start();
 			while($res = sqlsrv_fetch_array($stmt)){
 				$_SESSION['userid']=$res['ACCOUNTNUM'];
+				$_SESSION['customersite'] = $res['CustSite'];
+				$_SESSION['userRole'] = 0;
 				header('location: home.php');
 			}
 		}else{
@@ -119,7 +122,7 @@
 	
 			<div class="message" id="info">
 				<h3>COMING TO YOUR  CITY SOON</h3>
-				<button>Learn more ></button>
+				<button><a href="https://tajgasoline.com/" target="_blank" style="color: white;"> Learn more </a></button>
 			</div>
 			<div class="formbut"  onclick="hide()">
 				<button id="loginbtn">Login</button>

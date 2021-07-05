@@ -49,7 +49,7 @@ if(isset($_POST['submit'])){
           } 
           else{ 
             echo "<script>
-                  Swal.fire({text:'Your Order has been Placed check now!'}).then(function(result){
+                  Swal.fire({text:'Your Order has been Placed!', allowOutsideClick: false}).then(function(result){
                     if(result.value){
                       window.location.href = 'orderdetail.php'
                     }
@@ -73,8 +73,9 @@ if(isset($_POST['submit'])){
 
 }
 
-if (isset($_SESSION['userid'])) {
+if ( isset($_SESSION['userid']) && isset($_SESSION['customersite']) ) {
     $userid = $_SESSION['userid'];
+    $site = $_SESSION['customersite'];
 
 
 ?>
@@ -159,6 +160,18 @@ if (isset($_SESSION['userid'])) {
 
 </script>
 
+<style>
+/* form button  */
+.btn{
+  background-color: #ED1C24 !important;
+}
+.opt:hover{
+  background-color: red !important;
+}
+
+/* dropdown menu background */
+
+</style>
      
 
   </head>
@@ -168,7 +181,7 @@ if (isset($_SESSION['userid'])) {
     <form class="row g-3" method="POST" id="order">
   <div class="col-md-6">
     <label for="site" class="form-label">Site Name:</label>
-    <input type="text" class="form-control" autocomplete="off" value="TAJ-" id="test" name="site" required>
+    <input type="text" class="form-control" autocomplete="off" value="<?=$site;?>" id="test" name="site" readonly>
   </div>
   <!-- <div class="col-md-6">
     <label for="code" class="form-label">Product Code</label>
@@ -178,8 +191,8 @@ if (isset($_SESSION['userid'])) {
   <label for="code" class="form-label">Product Code:</label>
   <select class="form-control" name="ddl-productcode" id="code">
   <option disabled value="-1" selected>-- Select Product --</option>
-    <option value="01">01-HSD</option>
-    <option value="02">02-PMG</option>
+    <option value="01" class="opt">01-HSD</option>
+    <option value="02" class="opt">02-PMG</option>
 
   </select>
 </div>
@@ -190,7 +203,7 @@ if (isset($_SESSION['userid'])) {
   </div>
   <div class="col-md-6 mt-4">
     <label for="code" class="form-label">Required Quantity</label>
-    <input type="number" min="0" class="form-control" autocomplete="off" id="quantity" name="quantity" placeholder="QTY" required>
+    <input type="number" min="5000" class="form-control" autocomplete="off" id="quantity" name="quantity" placeholder="QTY" required>
   </div>
 
   <div class="col-md-6 mt-4">
@@ -204,7 +217,7 @@ if (isset($_SESSION['userid'])) {
  
  
   <div class="col-12">
-    <button type="submit" name="submit" class="btn btn-primary mt-4 ml-3" id="btnorder">Order Now</button>
+    <button type="submit" name="submit" class="btn btn-danger mt-4 ml-3" id="btnorder">Order Now</button>
   </div>
 </form>
 

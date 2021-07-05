@@ -6,16 +6,9 @@ session_start();
 if (!isset($_SESSION['userid'])) {
   header('location: login.php');
 }
-
-// if user wants to access Admin section
-if( $_SESSION['userRole'] == 0){
-  // session_destroy();
-  header("location: home.php");
-}
-
-if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 1 ) {
+if (isset($_SESSION['userid'])) {
   $userid = $_SESSION['userid'];
-// print_r($_SESSION);
+
 
 ?>
 
@@ -43,7 +36,7 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 1 ) {
     <link rel="stylesheet" href="../assets/DataTables2/Buttons-1.7.1/css/buttons.bootstrap4.css">
     <link rel="stylesheet" href="../assets/DataTables2/Buttons-1.7.1/css/buttons.dataTables.css">
     <link rel="stylesheet" href="../assets/DataTables2/DataTables-1.10.25/css/jquery.dataTables.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
   </head>
   <style>
@@ -83,7 +76,6 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 1 ) {
 #sidebar li a:hover{
   color: red !important;
 }
-
 
 
   </style>
@@ -126,12 +118,11 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 1 ) {
               </ul>
 	          </li> -->
 	          <li>
-              <a href="#">Home</a>
+              <a href="./admin.php">Home</a>
 	          </li>
 	          <li>
-              <a href="./adminApprove.php">Approved</a>
+              <a href="#">Approved</a>
 	          </li>
-        
             <!-- <li>
               <a href="#">Test 4</a>
 	          </li> -->
@@ -166,7 +157,7 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 1 ) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#" data-toggle="tooltip" data-placement="bottom" title="Admin"><?=$userid?></a>
+                    <a class="nav-link" href="#"><?=$userid?></a>
                 </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
@@ -189,18 +180,20 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 1 ) {
 
 <table class="table table-sm mt-1 table-hover" id="tab">
 
-  <thead class="head title" style="font-size: 14px;">
+  <thead class="head title">
     <tr class="table-bordered text-black text-center">
-    <th scope="col">S.No</th>
-    <th scope="col">Order ID</th>
-    <th scope="col">Customer ID</th>
-    <th scope="col">Customer Name</th>
-    <th scope="col">Product</th>
-    <th scope="col">Ordered Qty</th>
-    <th scope="col">HoldFree Qty</th>
+    <th scope="col" style="width: 30px;">S.No</th>
+    <th scope="col" style="width: 70px;">Order ID</th>
+    <th scope="col" style="width: 90px;">Cust ID</th>
+    <th scope="col" style="width: 50px;">Name</th>
+    <th scope="col" style="width: 70px;">Product</th>
+    <th scope="col" style="width: 110px;">Ordered Qty</th>
+    <th scope="col" style="width: 130px;">Approved Date</th>
+    <th scope="col" style="width: 100px;">Approved By</th>
+    <th scope="col" style="width: 120px;">HoldFree Qty</th>
     <th scope="col">Balance</th>
-    <th scope="col" width=12%>Tank Lourry</th>
-    <th scope="col">Action</th>
+    <th scope="col">Tank Lourry</th>
+
     </tr>
   </thead>
   <tbody>
@@ -208,12 +201,9 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 1 ) {
    <?php
 
 $query = "select ORDERPREFIXID,ORDERCREATEDUSER,
-PRODUCTNAME,REQUIREDQUANTITY 
-from orderedtable where approvedstatus=0";
+PRODUCTNAME,REQUIREDQUANTITY,APPROVEDDATE,APPROVEDBY,COALESCE(CARRIERCODE,'N/A') as CARRIERCODE,HOLDFREEQTY,BALANCE,APPROVEDSTATUS 
+from orderedtable where APPROVEDSTATUS=1 order by APPROVEDDATE desc";
 $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable" => 'static')) or die(sqlsrv_errors());
-// $query2="sELECT CARRIERCODE FROM TMSCARRIER WHERE DATAAREAID = 'TGPL' AND ACTIVE = 1";
-// $stmt2 = sqlsrv_query($conn, $query2, array(), array("Scrollable" => 'static')) or die(sqlsrv_errors());
-
 //$res = sqlsrv_fetch_array($stmt);
 $counter = 1;
 // $balance = $res['REQUIREDQUANTITY'] + $holdsFreeQty;
@@ -222,27 +212,22 @@ while ($res = sqlsrv_fetch_array($stmt)) {
 
     <tr class="text-black text-center">
     <td id="serial" class="num"><?php echo $counter++;?></td>
-    <td><?php echo $res['ORDERPREFIXID']; ?></td>
-    <td style="cursor: pointer;color:blue;" class="credit" data-bid="<?=$res['ORDERCREATEDUSER'];?>"><?php echo $res['ORDERCREATEDUSER']; //getBalance($res['ORDERCREATEDUSER']); ?></td>
-    <td width="15%"><?=getName($res['ORDERCREATEDUSER']);?></td>
+    <td width="9%"><?php echo $res['ORDERPREFIXID']; ?></td>
+    <td><?php echo $res['ORDERCREATEDUSER']; ?></td>
+    <td style="width: 80px;"><?= getName($res['ORDERCREATEDUSER']); ?></td>
     <td><?php echo $res['PRODUCTNAME']; ?></td>
-    <td class="num"><?php echo $res['REQUIREDQUANTITY']; ?></td>
-    <td class="num"><input type="number" style="border:0.2px solid lightgray;border-radius:3px;text-align:center;" name="holdfree" class="holds"></td>
-    <td class="balance num"></td>
-    <td width=12%>
-    <div class="form-group" class="carrierparent">
-    <select name="carriercode" class="carrier" style="width: 120px;">
-    <option disabled value="-1" selected>  --  Select  --  </option>
-    <?=tlData();?>
-    </select>
-    </div>
-    </td>
+    <td class="num"><?php echo number_format($res['REQUIREDQUANTITY'],0); ?></td>
+    <td class="num"><?php echo $res['APPROVEDDATE']->format('Y-m-d'); ?></td>
+    <td><?php echo $res['APPROVEDBY']; ?></td>
+    <td class="num"><?php echo number_format($res['HOLDFREEQTY'],0); ?></td>
+    <td class="num"><?php echo number_format($res['BALANCE'],0); ?></td>
+    <td class="num"><?php echo $res['CARRIERCODE'];?></td>
 
 
-    <td class="action">
-      <button data-id="<?=$res['ORDERPREFIXID'];?>" data-qid="<?= $res['REQUIREDQUANTITY'];?>" data-toggle="tooltip" data-placement="bottom" title="Edit Record" class="btn btnEdit"><i class="fa fa-edit" style="color:red;font-size:20px;" id="update"></i></button>
-      <button class="btn btnApprove" data-toggle="tooltip" data-placement="bottom" title="Approve" disabled><i class="fa fa-check-circle" style="color:red;font-size:20px;"></i></button>
-    </td>    
+
+
+
+
 
   </tr>
 <?php
@@ -269,7 +254,6 @@ while ($res = sqlsrv_fetch_array($stmt)) {
     <script src="../assets/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/admin.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
       $(document).ready(function() {
@@ -280,21 +264,16 @@ while ($res = sqlsrv_fetch_array($stmt)) {
             lengthMenu:     "Show _MENU_ Entries"
           },
           "ordering": false
+          
         });
       
       //tooltip on edit and delete button
       $('[data-toggle="tooltip"]').tooltip({
       trigger : 'hover'
-      })        
-
-      //dropdown select
-      $(".carrier").select2({
-        // dropdownParent:$("#carrierparent")
-      });
+      })  
+      
       
       })
-
-      
       </script>
 
   </body>

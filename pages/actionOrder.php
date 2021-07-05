@@ -4,9 +4,10 @@ include('conn.php');
 
         $productcode = $_GET['productvalue'];
         $query = 
-        "select IT.NAMEALIAS
+        "select e.NAME
 
         FROM INVENTTABLE IT
+        inner join ECORESPRODUCTTRANSLATION as e on e.PRODUCT = IT.PRODUCT
         
         WHERE IT.DATAAREAID = 'TGPL' AND IT.ITEMID = '".$productcode."'";
         
@@ -15,7 +16,7 @@ include('conn.php');
         $num = sqlsrv_num_rows($stmt);
 	    if($num==1){
             while($res = sqlsrv_fetch_array($stmt)){
-                echo $res['NAMEALIAS'];
+                echo $res['NAME'];
             }
         }
     }

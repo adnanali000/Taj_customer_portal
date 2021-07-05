@@ -26,19 +26,25 @@ if (isset($_SESSION['userid'])) {
 
         <thead class="head">
           <tr class="table-bordered text-black text-center">
-            <th scope="col">Order Prefix ID</th>
+            <th scope="col">ID</th>
+            <th scope="col">Order</th>
             <th scope="col">Site Name</th>
+            <th scope="col">Product Code</th>
             <th scope="col">Product Name</th>
             <th scope="col">Quantity</th>
-            <th scope="col">Tentaive Date</th>
+            <th scope="col">Released</th>
+            <th scope="col">Balance</th>
+            <th scope="col">Tank Lorry</th>
+            <th scope="col">Tentative Rec Date</th>
             <th scope="col">Created Date</th>
           </tr>
         </thead>
         <tbody>
           <?php
 
-          $query = "select ORDERPREFIXID,SITENAME,PRODUCTNAME,REQUIREDQUANTITY,TENTATIVERECDATE,ORDERCREATEDON 
-          from orderedtable where ORDERCREATEDUSER='".$userid."' ORDER BY ORDERCREATEDON DESC";
+          $query = "select ORDERID,ORDERPREFIXID,SITENAME,COALESCE(CARRIERCODE,'N/A') as CARRIERCODE,PRODUCTCODE,HOLDFREEQTY,BALANCE,
+          PRODUCTNAME,REQUIREDQUANTITY,TENTATIVERECDATE,ORDERCREATEDON 
+          from orderedtable where ORDERCREATEDUSER='".$userid."' ORDER BY ORDERID DESC";
           $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable" => 'static')) or die(sqlsrv_errors());
           //$res = sqlsrv_fetch_array($stmt);
           
@@ -46,12 +52,17 @@ if (isset($_SESSION['userid'])) {
           ?>
 
             <tr class="text-black text-center">
+              <td><?php echo $res['ORDERID']; ?></td>
               <td><?php echo $res['ORDERPREFIXID']; ?></td>
               <td><?php echo $res['SITENAME']; ?></td>
+              <td><?php echo getItemName($res['PRODUCTCODE']); ?></td>
               <td><?php echo $res['PRODUCTNAME']; ?></td>
-              <td><?php echo $res['REQUIREDQUANTITY']; ?></td>
-              <td><?php echo $res['TENTATIVERECDATE']->format('Y-m-d') ?></td>
-              <td><?php echo $res['ORDERCREATEDON']->format('Y-m-d') ?></td>
+              <td class="num"><?php echo $res['REQUIREDQUANTITY']; ?></td>
+              <td class="num"><?php echo $res['HOLDFREEQTY']; ?></td>
+              <td class="num"><?php echo $res['BALANCE']; ?></td>
+              <td class="num"><?php echo $res['CARRIERCODE'];?></td>
+              <td class="num"><?php echo $res['TENTATIVERECDATE']->format('Y-m-d') ?></td>
+              <td class="num"><?php echo $res['ORDERCREATEDON']->format('Y-m-d') ?></td>
               
             </tr>
           <?php
@@ -61,6 +72,13 @@ if (isset($_SESSION['userid'])) {
       </table>
     </div>
 
+    <script src="text/javscript">
+  
+        // $(document).ready(function(){
+        //   $("#tab11").DataTable()
+        // })
+  
+  </script>
   </body>
 
   </html>

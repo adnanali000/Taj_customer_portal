@@ -1,5 +1,6 @@
 <?php
 
+    error_reporting(0);
     $serverName = "192.168.0.45";//serverName\instanceName
     $userId = "sa";
     $userPassword = "P@ssguard11";

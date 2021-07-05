@@ -95,5 +95,34 @@
     
     }
 
-?>
+    //getitemname
+    function getItemName($itemId){
+        global $conn;
+        $query = "select IT.NAMEALIAS
+
+        FROM INVENTTABLE IT
+        inner join ECORESPRODUCTTRANSLATION as e on e.PRODUCT = IT.PRODUCT
+        
+        WHERE IT.DATAAREAID = 'TGPL' AND IT.ITEMID = '".$itemId."'";
+        $stmt = sqlsrv_query($conn, $query,array(),array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
+        $num = sqlsrv_num_rows($stmt);
+        if($num==1){
+            while($res = sqlsrv_fetch_array($stmt)){
+                return $res['NAMEALIAS'];
+            }
+        }else{
+            return "failed";
+        }       
+    }
+
+    //TL Dropdown
+    function tlData(){
+        global $conn;
+        $query = "sELECT CARRIERCODE FROM TMSCARRIER WHERE DATAAREAID = 'TGPL' AND ACTIVE = 1";
+        $stmt = sqlsrv_query($conn, $query,array(),array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
+        while($res=sqlsrv_fetch_array($stmt)){
+            echo '<option value="'.$res["CARRIERCODE"].'">'.$res["CARRIERCODE"].'</option>';
+        }
+    }   
+
 

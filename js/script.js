@@ -40,7 +40,9 @@ $(document).ready(function(){
                         $("#btnlogin").prop("disabled",true);
                         $("#pas").prop("disabled",true);
                         // alert(data);
-                        swal("Attention","Invalid admin ID","error");
+                        swal({title:"Attention",
+                             text:"Invalid admin ID",
+                            button:"X"});
                     }else{
                         $("#name").val(data);
                         $("#btnlogin").prop("disabled",false);
@@ -58,7 +60,7 @@ $(document).ready(function(){
                     if(data == ""){
                         $("#btnlogin").prop("disabled",true);
                         $("#pas").prop("disabled",true);
-                        swal("Attention","Invalid Customer ID","error");
+                        swal({title:"Attention",text:"Invalid Customer ID",button:"X"});
                     }else{
                         $("#name").val(data);
                         $("#btnlogin").prop("disabled",false);

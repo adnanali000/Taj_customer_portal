@@ -8213,15 +8213,15 @@ h1, h2, h3, h4, h5,
   width: 100%; }
 
 #sidebar {
-  min-width: 300px;
-  max-width: 300px;
+  min-width: 150px;
+  max-width: 193px;
   background: #1d1919;
   color: #fff;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s; }
   #sidebar.active {
-    margin-left: -300px; }
+    margin-left: -130px; }
   #sidebar .logo {
     display: block;
     width: 120px;
@@ -8243,10 +8243,12 @@ h1, h2, h3, h4, h5,
       color: rgba(255, 255, 255, 0.8);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
       #sidebar ul li a:hover {
-        color: #f8b739; }
+        /* color: #f8b739;  */
+      }
     #sidebar ul li.active > a {
       background: transparent;
-      color: #f8b739; }
+      /* color: #f8b739;  */
+    }
   @media (max-width: 991.98px) {
     #sidebar {
       margin-left: -300px; }
@@ -8278,11 +8280,13 @@ a[data-toggle="collapse"] {
   transition: all 0.3s; }
 
 .btn.btn-primary {
-  background: #f8b739;
-  border-color: #f8b739; }
+  /* background: #f8b739; */
+  /* border-color: #f8b739;  */
+}
   .btn.btn-primary:hover, .btn.btn-primary:focus {
-    background: #f8b739 !important;
-    border-color: #f8b739 !important; }
+    /* background: #f8b739 !important; */
+    /* border-color: #f8b739 !important;  */
+  }
 
 .footer p {
   color: rgba(255, 255, 255, 0.5); }

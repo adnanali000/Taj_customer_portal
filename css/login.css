@@ -66,13 +66,17 @@ h1,h2,h3,h4,h5,h6{
     /* margin-bottom: 60px; */
     
 }
-@import url(//db.onlinewebfonts.com/c/0d2703af1d063ee7547a5e8a189bdb8f?family=Neutraface+2+Display+Inline);
-@font-face {font-family: "Neutraface 2 Display Inline"; src: url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.eot"); src: url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.woff") format("woff"), url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.svg#Neutraface 2 Display Inline") format("svg"); }
+/* @font-face {font-family: "Neutraface 2 Display Inline"; src: url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.eot"); src: url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.woff") format("woff"), url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/0d2703af1d063ee7547a5e8a189bdb8f.svg#Neutraface 2 Display Inline") format("svg"); } */
+@font-face {
+    font-family: NeutraDisplay;
+    src: url('../fonts/Neutra\ Display\ Titling.otf');
+}
 .message h3{
 
     line-height: 1.5;
     font-size: 40px;
-    font-family: "Neutraface 2 Display Inline" !important;
+    font-family: NeutraDisplay !important;
+    /* font-family: "Neutraface 2 Display Inline" !important; */
     /* font-weight: 800; */
 }
 
@@ -174,3 +178,33 @@ h1,h2,h3,h4,h5,h6{
 
 } */
 
+
+.swal-button{
+    background-color: #ED1C24;
+    border-radius: 0px;
+    font-size: 20px;
+    padding: 2px 11px;
+
+}
+.swal-button:hover{
+    background-color: red !important;
+}
+.swal-footer{
+    text-align: center;
+}
+.swal-icon{
+    border-style:none;
+    
+}
+.swal-modal{
+
+}
+.swal-icon:first-child{
+margin-top: 0px;
+}
+.swal-icon--error__line--left,.swal-icon--error__line--right{
+    visibility: hidden;
+}
+.swal-title{
+    padding: 0px 16px;
+}

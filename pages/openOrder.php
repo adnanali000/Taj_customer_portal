@@ -26,8 +26,8 @@ if (isset($_SESSION['userid'])) {
 
         <thead class="head">
           <tr class="table-bordered text-black text-center">
-            <th scope="col">SO Number</th>
-            <th scope="col">SO Status</th>
+            <th scope="col">PO Number</th>
+            <th scope="col">PO Status</th>
             <th scope="col">Site</th>
             <th scope="col">Warehouse</th>
             <th scope="col">Created Date</th>
@@ -36,15 +36,23 @@ if (isset($_SESSION['userid'])) {
         <tbody>
           <?php
 
-          $query = "select ST.SALESID,ST.CUSTACCOUNT, ST.SALESNAME,ST.SALESSTATUS,ST.INVENTSITEID,ST.INVENTLOCATIONID,
-                    ST.CREATEDDATETIME FROM SALESTABLE ST WHERE ST.CUSTACCOUNT = '" . $userid . "' and ST.SALESSTATUS = 1";
+          // $query = "select ST.SALESID,ST.CUSTACCOUNT, ST.SALESNAME,ST.SALESSTATUS,ST.INVENTSITEID,ST.INVENTLOCATIONID,
+          //           ST.CREATEDDATETIME FROM SALESTABLE ST 
+          //           WHERE ST.CUSTACCOUNT = '".$userid."' 
+          //           and st.dataareaid='tgpl' and ST.SALESSTATUS = 1";
+
+          $query = "select ST.SALESID,ST.CUSTACCOUNT, ST.SALESNAME,
+          CASE WHEN ST.SALESSTATUS = 1 THEN 'Opened' ELSE ' ' END AS SALESSTATUS,
+          ST.INVENTSITEID,ST.INVENTLOCATIONID,
+          ST.CREATEDDATETIME FROM SALESTABLE ST WHERE 
+          ST.CUSTACCOUNT = '" . $userid . "' and ST.SALESSTATUS = 1 ORDER BY CREATEDDATETIME DESC";
           $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable" => 'static')) or die(sqlsrv_errors());
-          $res = sqlsrv_fetch_array($stmt);
+          //$res = sqlsrv_fetch_array($stmt);
           while ($res = sqlsrv_fetch_array($stmt)) {
           ?>
 
             <tr class="text-black text-center">
-              <td><a href="./saleOrderDetail.php?salesid=<?php echo $res['SALESID']; ?>" target="_blank" class="text-primary"><?php echo $res['SALESID']; ?></a></td>
+              <td><a href="./openorderdetail.php?salesid=<?php echo $res['SALESID']; ?>" target="_blank" class="text-primary"><?php echo $res['SALESID']; ?></a></td>
               <td class="text-danger"><?php echo $res['SALESSTATUS']; ?></td>
               <td><?php echo $res['INVENTSITEID']; ?></td>
               <td><?php echo $res['INVENTLOCATIONID']; ?></td>

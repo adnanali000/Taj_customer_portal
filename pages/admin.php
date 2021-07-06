@@ -86,6 +86,7 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 1 ) {
 
 
 
+
   </style>
   <body>
 		
@@ -207,9 +208,9 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 1 ) {
       
    <?php
 
-$query = "select ORDERPREFIXID,ORDERCREATEDUSER,
+$query = "select ORDERID,ORDERPREFIXID,ORDERCREATEDUSER,
 PRODUCTNAME,REQUIREDQUANTITY 
-from orderedtable where approvedstatus=0";
+from orderedtable where approvedstatus=0 order by ORDERID desc";
 $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable" => 'static')) or die(sqlsrv_errors());
 // $query2="sELECT CARRIERCODE FROM TMSCARRIER WHERE DATAAREAID = 'TGPL' AND ACTIVE = 1";
 // $stmt2 = sqlsrv_query($conn, $query2, array(), array("Scrollable" => 'static')) or die(sqlsrv_errors());
@@ -223,14 +224,14 @@ while ($res = sqlsrv_fetch_array($stmt)) {
     <tr class="text-black text-center">
     <td id="serial" class="num"><?php echo $counter++;?></td>
     <td><?php echo $res['ORDERPREFIXID']; ?></td>
-    <td style="cursor: pointer;color:blue;" class="credit" data-bid="<?=$res['ORDERCREATEDUSER'];?>"><?php echo $res['ORDERCREATEDUSER']; //getBalance($res['ORDERCREATEDUSER']); ?></td>
-    <td width="15%"><?=getName($res['ORDERCREATEDUSER']);?></td>
+    <td width=10% style="cursor: pointer;color:blue;" class="credit" data-bid="<?=$res['ORDERCREATEDUSER'];?>"><?php echo $res['ORDERCREATEDUSER']; //getBalance($res['ORDERCREATEDUSER']); ?></td>
+    <td width="10%"><?=getName($res['ORDERCREATEDUSER']);?></td>
     <td><?php echo $res['PRODUCTNAME']; ?></td>
     <td class="num"><?php echo $res['REQUIREDQUANTITY']; ?></td>
-    <td class="num"><input type="number" style="border:0.2px solid lightgray;border-radius:3px;text-align:center;" name="holdfree" class="holds"></td>
+    <td class="num"><input type="number" style="border:0.2px solid lightgray;border-radius:3px;text-align:center;" name="holdfree" class="holds mt-3"></td>
     <td class="balance num"></td>
     <td width=12%>
-    <div class="form-group" class="carrierparent">
+    <div class="form-group mt-3" class="carrierparent">
     <select name="carriercode" class="carrier" style="width: 120px;">
     <option disabled value="-1" selected>  --  Select  --  </option>
     <?=tlData();?>

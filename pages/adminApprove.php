@@ -213,7 +213,7 @@ while ($res = sqlsrv_fetch_array($stmt)) {
     <tr class="text-black text-center">
     <td id="serial" class="num"><?php echo $counter++;?></td>
     <td width="9%"><?php echo $res['ORDERPREFIXID']; ?></td>
-    <td><?php echo $res['ORDERCREATEDUSER']; ?></td>
+    <td width=12%><?php echo $res['ORDERCREATEDUSER']; ?></td>
     <td style="width: 80px;"><?= getName($res['ORDERCREATEDUSER']); ?></td>
     <td><?php echo $res['PRODUCTNAME']; ?></td>
     <td class="num"><?php echo number_format($res['REQUIREDQUANTITY'],0); ?></td>

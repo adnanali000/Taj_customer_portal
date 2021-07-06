@@ -71,8 +71,8 @@
                     (SELECT ABS(CCT.AMOUNTCUR) FROM CUSTTRANS CCT WHERE CCT.TRANSTYPE = 15 AND CCT.RECID = CT.RECID) AS CREDIT,
                     (SELECT ABS(CCT.AMOUNTCUR) FROM CUSTTRANS CCT WHERE CCT.TRANSTYPE = 2 AND CCT.RECID = CT.RECID) AS DEBIT,
                     (ABS(CT.AMOUNTCUR)-ABS(CT.SETTLEAMOUNTCUR)) AS BALANCE,CT.CURRENCYCODE
-                    FROM CUSTTRANS CT WHERE CT.ACCOUNTNUM = '".$userid."' AND TRANSTYPE IN ('15','2')
-                    ORDER BY CT.TRANSDATE DESC";
+                    FROM CUSTTRANS CT WHERE CT.ACCOUNTNUM = '".$userid."'  AND TRANSTYPE IN ('15','2')
+                    AND (CT.TRANSDATE between DATEADD(DAY, -30, GETDATE())  AND GETDATE()) ORDER BY CT.TRANSDATE DESC";
                   	$stmt = sqlsrv_query($conn, $query, array(), array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
                     $result = sqlsrv_fetch_array($stmt);
                       

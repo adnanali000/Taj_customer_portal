@@ -42,7 +42,8 @@ if (isset($_SESSION['userid'])) {
         <tbody>
           <?php
 
-          $query = "select ORDERID,ORDERPREFIXID,SITENAME,COALESCE(CARRIERCODE,'N/A') as CARRIERCODE,PRODUCTCODE,HOLDFREEQTY,BALANCE,
+          $query = "select ORDERID,ORDERPREFIXID,SITENAME,COALESCE(CARRIERCODE,'N/A') as CARRIERCODE,
+          PRODUCTCODE,HOLDFREEQTY,BALANCE,
           PRODUCTNAME,REQUIREDQUANTITY,TENTATIVERECDATE,ORDERCREATEDON 
           from orderedtable where ORDERCREATEDUSER='".$userid."' ORDER BY ORDERID DESC";
           $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable" => 'static')) or die(sqlsrv_errors());
@@ -59,7 +60,7 @@ if (isset($_SESSION['userid'])) {
               <td><?php echo $res['PRODUCTNAME']; ?></td>
               <td class="num"><?php echo $res['REQUIREDQUANTITY']; ?></td>
               <td class="num"><?php echo $res['HOLDFREEQTY']; ?></td>
-              <td class="num"><?php echo $res['BALANCE']; ?></td>
+              <td class="num"><?php echo $res['BALANCE']==0?$res['REQUIREDQUANTITY']:$res['BALANCE']; ?></td>
               <td class="num"><?php echo $res['CARRIERCODE'];?></td>
               <td class="num"><?php echo $res['TENTATIVERECDATE']->format('Y-m-d') ?></td>
               <td class="num"><?php echo $res['ORDERCREATEDON']->format('Y-m-d') ?></td>

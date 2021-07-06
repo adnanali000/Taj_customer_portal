@@ -99,11 +99,17 @@ $qtyPer = number_format(($quantity/$totalOrder)*100,2);
     exportEnabled: true,
     animationEnabled: true,
     title:{
-      text: "Order Detail"
+      text: "Order Detail",
+      fontSize: 20,
+      fontFamily:"Neutra Text",
+      
+
+      
     },
     legend:{
       cursor: "pointer",
-      itemclick: explodePie
+      itemclick: explodePie,
+
     },
     data: [{
       type: "pie",
@@ -132,11 +138,16 @@ $qtyPer = number_format(($quantity/$totalOrder)*100,2);
     exportEnabled: true,
     animationEnabled: true,
     title:{
-      text: "Purchase Order"
+      text: "Purchase Order",
+      fontSize: 20,
+      fontFamily:"Neutra Text"
+
     },
     legend:{
       cursor: "pointer",
-      itemclick: explodePie2
+      itemclick: explodePie2,
+      // horizontalAlign:"right",
+      // verticalAlign:"center"
     },
     data: [{
       type: "pie",

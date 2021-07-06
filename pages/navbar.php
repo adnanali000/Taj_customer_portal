@@ -28,6 +28,12 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 0 ) {
   }
 
 
+  //ledger report php
+  if(isset($_POST['report'])){
+    print_r($_POST);
+  }
+
+
 ?>
   <!DOCTYPE html>
   <html lang="en">
@@ -55,6 +61,17 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 0 ) {
 
   </head>
 
+  <style>
+    #ledger:hover{
+      border-bottom: 1px solid red;
+    }
+    #ledger:focus,#ledger:active {
+   outline: none !important;
+   box-shadow: none;
+}
+
+  </style>
+
   <body>
                                                 <!-- navbar -->
     <div class="container-fluid">
@@ -80,6 +97,7 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 0 ) {
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#" style="cursor:text"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i><?= getAccount($userid) ?></a>
+                <a class="dropdown-item" href="./changepassword.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Change Password</a>
                 <a class="dropdown-item" href="./logout.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Logout</a>
           </ul>
 
@@ -129,12 +147,42 @@ group by c.CREDITMAX;
               </div>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link ml-1 dropdown-toggle text-black" href="http://192.168.0.44/ReportServer/Pages/ReportViewer.aspx?%2fAXReports%2fpartycustomerledgernew&rs:Command=Render&GC=<?= urlencode( $_SESSION['userid']);?>" target="_blank" id="navbarDropdown" role="button" >
-                Ledger Reports
-              </a>
-              <!-- <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="http://192.168.0.44/ReportServer/Pages/ReportViewer.aspx?%2fAXReports%2fpartycustomerledgernew&rs:Command=Render&GC=<?=$_SESSION['userid'];?>" target="_blank"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Ledger Report</a>
-              </div> -->
+              
+            <?php
+
+// for from date param : [ should be current date - 30 days ]
+
+$fromDate = date('Y-m-d', strtotime('-30 days'));
+
+
+
+// for to date param : [ current date ]
+
+$toDate = date('Y-m-d'); // [Format : month-date-Year]
+
+// print_r($fromDate."<br/>".$toDate);
+
+?>
+
+
+
+<form id="LedgerReport" action="http://192.168.0.44/ReportServer/Pages/ReportViewer.aspx?%2fAXReports%2fpartycustomerledgernew" method="POST" target="_blank">
+
+<input type="hidden" name="rs:Command" value="Render" />
+
+<input type="hidden" name="rc:Parameters" value="false" />  <!-- Hide report parameters -->                
+
+<input type="hidden" name="FrmDt" value="<?= $fromDate;?>" /> <!-- Parameter From Date -->
+
+<input type="hidden" name="ToDt" value="<?= $toDate;?>" /> <!-- Parameter To Date -->
+
+<input type="hidden" name="GC" value="<?=$_SESSION['userid'];?>" /> <!-- Parameter GC -->
+
+<button type="submit" class="nav-link ml-1 text-black" id="ledger">Ledger Reports</button>
+
+</form>  
+             
+            
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link ml-1 dropdown-toggle text-black" href="./customertransaction.php"  id="navbarDropdown" role="button">

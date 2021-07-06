@@ -40,7 +40,9 @@ if (isset($_SESSION['userid'])) {
           $query = "select ST.SALESID,ST.CUSTACCOUNT, ST.SALESNAME,
                     CASE WHEN ST.SALESSTATUS = 3 THEN 'INVOICED' ELSE ' ' END AS SALESSTATUS,
                     ST.INVENTSITEID,ST.INVENTLOCATIONID,
-                    ST.CREATEDDATETIME FROM SALESTABLE ST WHERE ST.CUSTACCOUNT = '" . $userid . "' and ST.SALESSTATUS = 3 ORDER BY CREATEDDATETIME DESC";
+                    ST.CREATEDDATETIME FROM SALESTABLE ST WHERE ST.CUSTACCOUNT = '" . $userid . "' and ST.SALESSTATUS = 3
+                    AND (ST.CREATEDDATETIME between DATEADD(DAY, -30, GETDATE()) and GETDATE()) 
+                    ORDER BY CREATEDDATETIME DESC";
           $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable" => 'static')) or die(sqlsrv_errors());
           $res = sqlsrv_fetch_array($stmt);
           while ($res = sqlsrv_fetch_array($stmt)) {

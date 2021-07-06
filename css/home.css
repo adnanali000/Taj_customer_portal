@@ -244,4 +244,11 @@ tbody:hover{
   /* font-weight: 1000; */
   font-size: 16px;
   }
-  
+
+  #tab_filter > label > input[type='search'] {
+    outline: none;
+    border-color: #ED1C24 !important;
+  }
+  legend{
+     color: red !important; 
+  }

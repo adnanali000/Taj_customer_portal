@@ -11,7 +11,12 @@ include('navbar.php');
         $query = "update CUSTTABLE set PASSWORD = '".$newPass."', CONFIRMPW = '".$confirmPass."' where ACCOUNTNUM = '".$_SESSION['userid']."'";
         $stmt = sqlsrv_query($conn, $query,array(),array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
         if($stmt){
-            echo "<script>Swal.fire('Password Updated')</script>";
+            echo "<script>Swal.fire({text:'Password Updated', allowOutsideClick: false}).then(function(result){
+              if(result.value){
+                window.location.href = 'home.php'
+              }
+            });
+            </script>";
 
         }else{
             echo "<script>Swal.fire('Some Error Occur')</script>";
@@ -38,12 +43,15 @@ include('navbar.php');
     #changeform{
         padding: 20px;
         border: 1px solid white;
-        width: 30%;
+        width: 29%;
         margin:auto;
         margin-top: 7%;
         height: 330px;
         border-radius: 3px;
         box-shadow: 2px 2px 4px 2px gray;
+    }
+    .btn{
+      margin-left: 80% !important;
     }
   
   

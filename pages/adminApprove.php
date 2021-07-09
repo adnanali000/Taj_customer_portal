@@ -192,7 +192,7 @@ if (isset($_SESSION['userid'])) {
     <th scope="col" style="width: 100px;">Approved By</th>
     <th scope="col" style="width: 120px;">HoldFree Qty</th>
     <th scope="col">Balance</th>
-    <th scope="col">Tank Lourry</th>
+    <th scope="col">Tank Lorry</th>
 
     </tr>
   </thead>

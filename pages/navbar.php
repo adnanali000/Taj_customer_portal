@@ -43,19 +43,21 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 0 ) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/home.css">
+
     <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
     <link rel="manifest" href="../site.webmanifest">
-    <link rel="stylesheet" href="../assets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/fontawesome-free-5.15.3-web/css/all.css">
+    <!-- <link rel="stylesheet" href="../assets/font-awesome-4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="../assets/bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/DataTables2/Buttons-1.7.1/css/buttons.bootstrap4.css">
     <link rel="stylesheet" href="../assets/DataTables2/Buttons-1.7.1/css/buttons.dataTables.css">
     <link rel="stylesheet" href="../assets/DataTables2/DataTables-1.10.25/css/jquery.dataTables.min.css">
 	<link href="http://fonts.cdnfonts.com/css/neutra-text-alt" rel="stylesheet">
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../assets/font-awesome-4.7.0/css/font-awesome.css">
+  <!-- <link rel="stylesheet" href="../assets/font-awesome-4.7.0/css/font-awesome.min.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/font-awesome-4.7.0/css/font-awesome.css"> -->
 
 
 
@@ -137,11 +139,11 @@ group by c.CREDITMAX;
                 Order Details
               </a>
               <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="./allOrder.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i> All Orders</a>
-                <a class="dropdown-item" href="./openOrder.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Open Orders</a>
-                <a class="dropdown-item" href="./invoicedOrder.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Invoiced Orders</a>
-                <a class="dropdown-item" href="./orderNow.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Order Now</a>
-                <a class="dropdown-item" href="./orderdetail.php"><i class="fas fa-angle-right" style='font-size:16px;color:red'></i>Purchase Order</a>
+                <a class="dropdown-item" href="./allOrder.php"><i class="fas fa-angle-right" style='font-size:16px;color:red;'></i> All Orders</a>
+                <a class="dropdown-item" href="./openOrder.php"><i class="fas fa-angle-right" style='font-size:16px;color:red;'></i>Open Orders</a>
+                <a class="dropdown-item" href="./invoicedOrder.php"><i class="fas fa-angle-right" style='font-size:16px;color:red;'></i>Invoiced Orders</a>
+                <a class="dropdown-item" href="./orderNow.php"><i class="fas fa-angle-right" style='font-size:16px;color:red;'></i>Order Now</a>
+                <a class="dropdown-item" href="./orderdetail.php"><i class="fas fa-angle-right" style='font-size:16px;color:red;'></i>Purchase Order</a>
 
 
               </div>
@@ -202,10 +204,11 @@ $toDate = date('Y-m-d'); // [Format : month-date-Year]
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="../assets/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
     <script src="../assets/DataTables2/Buttons-1.7.1/js/buttons.bootstrap4.js"></script>
     <script src="../assets/DataTables2/Buttons-1.7.1/js/dataTables.buttons.js"></script>
     <script src="../assets/DataTables2/Buttons-1.7.1/js/buttons.dataTables.js"></script>
+    <script src="../assets/fontawesome-free-5.15.3-web/js/all.js"></script>
     <script src="../assets/DataTables2/DataTables-1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>

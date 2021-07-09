@@ -58,7 +58,15 @@ $(document).ready(function(){
             $(this).parents('tr').find('td select.carrier').prop('disabled',true);
 
             // console.log("prefix"+prefix+"\n"+"holdsfree"+data1+"\n"+"balance"+bal);
-            Swal.fire("Your data has been approved");     
+            Swal.fire({title:"Your data has been approved",
+                       confirmButtonText:"OK"
+                        }).then((result=>{
+                            if(result.isConfirmed){
+                                window.location.reload();
+                            }else{
+
+                            }
+                        }));     
             $.ajax({
                 url: "actionAdminTransaction.php",
                 method: "GET",

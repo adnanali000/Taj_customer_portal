@@ -68,6 +68,7 @@ $balance = $result6['balance'];
 $quantity = $result7['quantity'];
 $totalOrder = $holds+$quantity+$balance;
 
+
 //percentage calculation
 $openPer =  number_format(($open/$total)*100,2) ;
 $invoicePer = number_format(($invoice/$total)*100,2) ;

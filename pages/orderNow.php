@@ -16,6 +16,7 @@ if(isset($_POST['submit'])){
   $quantity = htmlentities($_POST['quantity'],ENT_QUOTES);
   $litre = htmlentities($_POST['litre'],ENT_QUOTES);
   $recDate = htmlentities($_POST['recdate'],ENT_QUOTES);
+  $balance = htmlentities($_POST['quantity'],ENT_QUOTES);
   //current cate
   $date = date('m/d/Y');
   // print_r($date);
@@ -36,10 +37,10 @@ if(isset($_POST['submit'])){
 
   $dataarea = "tgpl";
   $query = "insert INTO orderedtable 
-  (OrderID,OrderCreatedOn,OrderCreatedUser,ProductCode,ProductName,RequiredQuantity,SiteName,TentativeRecDate,Unit,RECID,DATAAREAID)
+  (OrderID,OrderCreatedOn,OrderCreatedUser,ProductCode,ProductName,RequiredQuantity,SiteName,TentativeRecDate,Unit,RECID,DATAAREAID,BALANCE)
   VALUES 
-  (?,?,?,?,?,?,?,?,?,?,?); select @@IDENTITY AS id; "; 
-          $params = array(&$newInsertedId,&$date,&$userid,&$productCode,&$productName,&$quantity,&$site,&$recDate,&$UoM,&$newrecid,&$dataarea);
+  (?,?,?,?,?,?,?,?,?,?,?,?); select @@IDENTITY AS id; "; 
+          $params = array(&$newInsertedId,&$date,&$userid,&$productCode,&$productName,&$quantity,&$site,&$recDate,&$UoM,&$newrecid,&$dataarea,&$balance);
           $stmt = sqlsrv_prepare($conn, $query, $params);
 
           if (sqlsrv_execute( $stmt ) === false) {

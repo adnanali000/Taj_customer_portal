@@ -18,7 +18,7 @@ if( isset($_GET['salesid'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purchase Order Detail</title>
+    <title>Invoice Order Detail</title>
 </head>
 <style>
     #nav2{
@@ -236,35 +236,35 @@ $res = sqlsrv_fetch_array($stmt);
           document.getElementById('sub').className = "fas fa-check";
           document.getElementById('sub').style.color = "green";
         }else{
-          document.getElementById('sub').className = "fas fa-close";
+          document.getElementById('sub').className = "fas fa-times";
           document.getElementById('sub').style.color = "red";
         }
         if(schedule){
           document.getElementById('sch').className = "fas fa-check";
           document.getElementById('sch').style.color = "green";
         }else{
-          document.getElementById('sch').className = "fas fa-close";
+          document.getElementById('sch').className = "fas fa-times";
           document.getElementById('sch').style.color = "red";
         }
         if(ship){
           document.getElementById('shi').className = "fas fa-check";
           document.getElementById('shi').style.color = "green";
         }else{
-          document.getElementById('shi').className = "fas fa-close";
+          document.getElementById('shi').className = "fas fa-times";
           document.getElementById('shi').style.color = "red";
         }
         if(deliver){
           document.getElementById('del').className = "fas fa-check";
           document.getElementById('del').style.color = "green";
         }else{
-          document.getElementById('del').className = "fas fa-close";
+          document.getElementById('del').className = "fas fa-times";
           document.getElementById('del').style.color = "red";
         }
         if(invoice){
           document.getElementById('inv').className = "fas fa-check";
           document.getElementById('inv').style.color = "green";
         }else{
-          document.getElementById('inv').className = "fas fa-close";
+          document.getElementById('inv').className = "fas fa-times";
           document.getElementById('inv').style.color = "red";
         }
        

@@ -200,7 +200,7 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 1 ) {
     <th scope="col">Ordered Qty</th>
     <th scope="col">HoldFree Qty</th>
     <th scope="col">Balance</th>
-    <th scope="col" width=12%>Tank Lourry</th>
+    <th scope="col" width=12%>Tank Lorry</th>
     <th scope="col">Action</th>
     </tr>
   </thead>
@@ -208,7 +208,7 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 1 ) {
       
    <?php
 
-$query = "select ORDERID,ORDERPREFIXID,ORDERCREATEDUSER,
+$query = "select ORDERID,ORDERPREFIXID,ORDERCREATEDUSER,BALANCE,
 PRODUCTNAME,REQUIREDQUANTITY 
 from orderedtable where approvedstatus=0 order by ORDERID desc";
 $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable" => 'static')) or die(sqlsrv_errors());
@@ -229,10 +229,10 @@ while ($res = sqlsrv_fetch_array($stmt)) {
     <td><?php echo $res['PRODUCTNAME']; ?></td>
     <td class="num"><?php echo $res['REQUIREDQUANTITY']; ?></td>
     <td class="num"><input type="number" style="border:0.2px solid lightgray;border-radius:3px;text-align:center;" name="holdfree" class="holds mt-3"></td>
-    <td class="balance num"></td>
+    <td class="balance num"><?php echo $res['BALANCE']; ?></td>
     <td width=12%>
     <div class="form-group mt-3" class="carrierparent">
-    <select name="carriercode" class="carrier" style="width: 120px;">
+    <select name="carriercode" class="carrier" style="width: 120px;" required>
     <option disabled value="-1" selected>  --  Select  --  </option>
     <?=tlData();?>
     </select>

@@ -114,57 +114,7 @@ h1,h2,h3,h4,h5,h6{
     margin-top: 50px;
 }
 
-@media screen and (max-width:600px){
-    .message{
-    margin-top: 50px;
-    font-size: 12px;
-    margin-left: 5px;
-    width:230px;
 
-    }   
-    .formbut{
-        margin:0;
-        margin-top: 150px;
-        margin-left: 70px;
-    }
-    .message h3{
-        font-size: 24px;
-
-    }
-    .formbut button{
-        width:200px;
-        height: 40px;
-    }
-    .navli img{
-        /* margin-left: 30px; */
-        /* margin-top: 10px; */
-        margin-left: 3px !important;
-        width:75px !important;
-        height:65px !important;
-    }
-    .portal{
-        margin-left: -5px !important;
-        /* margin-top: 30px; */
-        margin-right: 10px !important;
-        font-size: 14px;
-    }
-    .navlogin{
-        border-bottom: none;
-        border-bottom: 1px solid white !important;
-        width: 100% !important;
-        margin-right: 10px;
-    }
-    .wrap-login100{
-        width: 222px !important;
-        /* border-radius: 10px; */
-        overflow: hidden !important;
-        /* margin: 0px auto; */
-        margin-left: -145px !important;
-        padding: 13px !important;
-        /* margin-bottom: 60px; */
-        height: 350px !important;
-      }
-}
 /* .swal-modal{
  width: 300px !important;
  height: 200px !important;
@@ -207,4 +157,71 @@ margin-top: 0px;
 }
 .swal-title{
     padding: 0px 16px;
+}
+
+/* media query  */
+@media screen and (max-width:600px){
+    .message{
+    margin-top: 80px;
+    font-size: 12px;
+    margin-left: 5px;
+    width:230px;
+
+    }   
+    .formbut{
+        margin:0;
+        margin-top: 50px;
+        margin-left: 40px;
+    }
+    .message h3{
+        font-size: 24px;
+
+    }
+    .formbut button{
+        width:150px;
+        height: 23px;
+        margin-top: 50px;
+        margin-left: 40px;
+    }
+    .navli img{
+        /* margin-left: 30px; */
+        /* margin-top: 10px; */
+        margin-left: 3px !important;
+        width:75px !important;
+        height:65px !important;
+    }
+    .portal{
+        margin-left: -5px !important;
+        /* margin-top: 30px; */
+        margin-right: 10px !important;
+        font-size: 14px;
+    }
+    .navlogin{
+        border-bottom: none;
+        border-bottom: 1px solid white !important;
+        width: 100% !important;
+        height: 75px;
+    }
+    .wrap-login100{
+        width: 285px !important;
+        /* border-radius: 10px; */
+        overflow: hidden !important;
+        /* margin: 0px auto; */
+        margin-left: -145px !important;
+        padding: 13px !important;
+        /* margin-bot/tom: 120px !important; */
+        height: 300px !important;
+        margin-top: -1px !important;
+        margin-top: 130px !important;
+      }
+      .login100-form-btn{
+        margin-top: -50px !important;
+      }
+      .message button{
+          width: 60px !important;
+      }
+      .message button a{
+          font-size: 10px !important;
+      }
+
 }

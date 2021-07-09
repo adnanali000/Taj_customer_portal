@@ -68,7 +68,7 @@ tbody:hover{
 .dropdown-menu{
     display: none !important;
 }
-.dropdown-item i{
+.dropdown-item svg{
     visibility: hidden;
     margin-right: 5px;
 }
@@ -83,8 +83,9 @@ tbody:hover{
     display: block !important;
 }
 
-.dropdown-item:hover i{
-    visibility: visible;
+.dropdown-item:hover svg{
+    visibility: visible !important;
+    margin-bottom: 8px !important;
 }
 .dropdown-item{
     color: grey !important;
@@ -231,6 +232,10 @@ tbody:hover{
   font-weight: bold !important;
   font-size: 13px;
   }
+
+  .swal2-html-container{
+    font-family: NeutraAlt !important;
+}
   
   
   /* thead  */
@@ -251,4 +256,63 @@ tbody:hover{
   }
   legend{
      color: red !important; 
+  }
+
+
+  /* detail page  */
+  .svg-inline--fa{
+    vertical-align: -10px !important;
+  }
+
+  /* media query  */
+  @media screen and (max-width:600px){
+      /* home balance input  */
+    .num{
+        width: 200px !important;
+        height: 30px !important; 
+    }
+
+     /* swal customer balance */
+     .swal2-popup{
+         width: 300px !important;
+         height: 120px !important;
+     }
+     .swal2-html-container{
+         font-size: 14px !important;
+         font-family: NeutraAlt !important;
+     }
+     .swal2-styled.swal2-confirm{
+        width: 50px !important;
+        height: 24px !important;
+     }
+     .swal2-styled{
+         padding: 0px !important;
+     }
+     .swal2-actions{
+        margin: 0.25em auto 0 !important;
+     }
+
+     /* table head  */
+     .head{
+        font-size: 10px !important;
+     }
+     table.dataTable tbody th, table.dataTable tbody td {
+         font-size: 10px !important;
+     }
+     #customtab{
+         margin-top: 180px !important;
+     }
+     #changeform{
+         width: 250px !important;
+         margin-top: 14% !important;
+     }
+     
+     .form-control{
+         width: 200px !important;
+         margin-left: 0px !important;
+     }
+     .dropdown-item svg{
+        margin-left: 10px !important;
+    }
+
   }

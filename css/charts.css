@@ -54,3 +54,12 @@
     z-index: 9999;
     background-color: white;
 }
+@media screen and (max-width:600px){
+    #chartContainer,#chartContainer2{
+        margin-top: 70px !important;
+        width: 280px !important;
+        height: 220px !important;
+        /* border: 1px solid black; */
+    }
+
+}

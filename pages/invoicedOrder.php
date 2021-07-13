@@ -17,6 +17,9 @@ if (isset($_SESSION['userid'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoiced Orders</title>
+    <link rel="stylesheet" href="../css/charts.css">
+    <link rel="stylesheet" href="../css/jquery.convform.css">
+    <script src="../js/jquery.convform.js"></script>
 
   </head>
 
@@ -41,7 +44,7 @@ if (isset($_SESSION['userid'])) {
                     CASE WHEN ST.SALESSTATUS = 3 THEN 'INVOICED' ELSE ' ' END AS SALESSTATUS,
                     ST.INVENTSITEID,ST.INVENTLOCATIONID,
                     ST.CREATEDDATETIME FROM SALESTABLE ST WHERE ST.CUSTACCOUNT = '" . $userid . "' and ST.SALESSTATUS = 3
-                    AND (ST.CREATEDDATETIME between DATEADD(DAY, -30, GETDATE()) and GETDATE()) 
+                    AND (ST.CREATEDDATETIME between DATEADD(DAY, -40, GETDATE()) and GETDATE()) 
                     ORDER BY CREATEDDATETIME DESC";
           $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable" => 'static')) or die(sqlsrv_errors());
           $res = sqlsrv_fetch_array($stmt);
@@ -62,6 +65,8 @@ if (isset($_SESSION['userid'])) {
         </tbody>
       </table>
     </div>
+  <script src="../js/chatbot.js"></script>
+
   </body>
 
   </html>

@@ -106,7 +106,7 @@ $(document).ready(function(){
             data: {credit:credit},
             success: function(data){
                 var data = JSON.parse(data);
-                Swal.fire({html:`Balance:  ${data.balance} <br><br>  Credit Limit: ${data.credit}`,
+                Swal.fire({html:`Balance:  ${data.balance} <br><br>  Credit Limit: ${data.credit}<br><br>  Available Credit Limit: ${data.available}`,
                     confirmButtonText:'Close'});
             }
 

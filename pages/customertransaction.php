@@ -10,6 +10,9 @@
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Customer Transaction</title>
+     <link rel="stylesheet" href="../css/charts.css">
+    <link rel="stylesheet" href="../css/jquery.convform.css">
+    <script src="../js/jquery.convform.js"></script>
  </head>
  <style>
      #tab_filter > label > input[type='search']{
@@ -30,6 +33,8 @@
         ";
         $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
          $res = sqlsrv_fetch_array($stmt);
+ $availableCreditLimit = $res['Credit_Limit'] - $res['Balance'];
+
        
      ?>
 
@@ -38,11 +43,15 @@
     <div class="form-row">
         <div class="form-group col-md-3">
             <label class="col-form-label">Customer Balance :</label>
-            <input type="text" class="form-control num" value="<?= number_format( $res["Balance"],2);?>" placeholder="hello" disabled>
+            <input type="text" class="form-control num" value="<?= number_format( $res["Balance"],0);?>" placeholder="hello" disabled>
         </div>
         <div class="form-group col-md-3">
             <label class="col-form-label">Customer Credit_Limit :</label>
-            <input type="text" class="form-control num" value="<?= number_format($res["Credit_Limit"],2) ;?>"  placeholder="hello" disabled>
+            <input type="text" class="form-control num" value="<?= number_format($res["Credit_Limit"],0) ;?>"  placeholder="hello" disabled>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="col-form-label">Available Credit_Limit :</label>
+            <input type="text" class="form-control num" value="<?= number_format($availableCreditLimit,0) ;?>"  placeholder="hello" disabled>
         </div>
     </div>
     
@@ -59,7 +68,7 @@
               <th scope="col">Credit</th>
               <th scope="col">Debit</th>
               <th scope="col">Balance</th>
-              <th scope="col">Currency Code</th>
+              <!-- <th scope="col">Currency Code</th> -->
           </tr>
         </thead>
         <tbody>
@@ -70,9 +79,9 @@
                     CASE WHEN CT.TRANSTYPE = 2 THEN 'SALES ORDER' WHEN CT.TRANSTYPE = 15 THEN 'PAYMENT' ELSE '' END AS TRANSTYPE,CT.TRANSDATE , case when ct.invoice  = '' then 'N/A' else ct.invoice end as 'INVOICE',
                     (SELECT ABS(CCT.AMOUNTCUR) FROM CUSTTRANS CCT WHERE CCT.TRANSTYPE = 15 AND CCT.RECID = CT.RECID) AS CREDIT,
                     (SELECT ABS(CCT.AMOUNTCUR) FROM CUSTTRANS CCT WHERE CCT.TRANSTYPE = 2 AND CCT.RECID = CT.RECID) AS DEBIT,
-                    (ABS(CT.AMOUNTCUR)-ABS(CT.SETTLEAMOUNTCUR)) AS BALANCE,CT.CURRENCYCODE
+                    (ABS(CT.AMOUNTCUR)-ABS(CT.SETTLEAMOUNTCUR)) AS BALANCE 
                     FROM CUSTTRANS CT WHERE CT.ACCOUNTNUM = '".$userid."'  AND TRANSTYPE IN ('15','2')
-                    AND (CT.TRANSDATE between DATEADD(DAY, -30, GETDATE())  AND GETDATE()) ORDER BY CT.TRANSDATE DESC";
+                    AND (CT.TRANSDATE between DATEADD(DAY, -40, GETDATE())  AND GETDATE()) ORDER BY CT.TRANSDATE DESC";
                   	$stmt = sqlsrv_query($conn, $query, array(), array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
                     $result = sqlsrv_fetch_array($stmt);
                       
@@ -87,7 +96,7 @@
                     <td class="num"><?php echo number_format($result['CREDIT'],2);?></td>
                     <td class="num"><?php echo number_format($result['DEBIT'],2);?></td>
                     <td class="num"><?php echo number_format($result['BALANCE'],2);?></td>
-                    <td><?php echo $result['CURRENCYCODE'];?></td>
+                    <!-- <td><?php //echo $result['CURRENCYCODE'];?></td> -->
 
                 </tr>
                 <?php 
@@ -104,5 +113,7 @@
             // });
         })
     </script>
+  <script src="../js/chatbot.js"></script>
+
  </body>
  </html>

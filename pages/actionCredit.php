@@ -15,11 +15,15 @@ if (isset($_SESSION['userid'])) {
         ";
         $stmt2 = sqlsrv_query($conn, $query2, array(), array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
         $res2 = sqlsrv_fetch_array($stmt2);
+        $availableCreditLimit = $res2['Credit_Limit'] - $res2['Balance'];
+
+        
         $response = array();
         if($stmt2){
             $response['status'] = 'success';
-            $response['balance'] = number_format($res2['Balance'],2);
-            $response['credit'] = number_format($res2['Credit_Limit'],2);
+            $response['balance'] = number_format($res2['Balance'],0);
+            $response['credit'] = number_format($res2['Credit_Limit'],0);
+            $response['available'] = number_format($availableCreditLimit,0);
 
         }else{
             $response['status'] = 'failed';

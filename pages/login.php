@@ -111,7 +111,7 @@
  ?>
 	
 	<div class="limiter">
-		<div class="container-login100" id="bgImage" style="background-image: url('../icon/bg-image.jpg');">
+		<div class="container-login100" id="bgImage" style="background-image: url('../icon/bg6.jpg');">
 			<div class="navlogin" id="loginNav">
 				<ul class="navli">
 					<li><img src="../icon//logo_white.png" alt=""></li>

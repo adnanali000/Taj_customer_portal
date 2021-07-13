@@ -17,6 +17,9 @@ if (isset($_SESSION['userid'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Detail</title>
+    <link rel="stylesheet" href="../css/charts.css">
+    <link rel="stylesheet" href="../css/jquery.convform.css">
+    <script src="../js/jquery.convform.js"></script>
 
   </head>
 
@@ -35,7 +38,7 @@ if (isset($_SESSION['userid'])) {
             <th scope="col">Released</th>
             <th scope="col">Balance</th>
             <th scope="col">Tank Lorry</th>
-            <th scope="col">Tentative Rec Date</th>
+            <!-- <th scope="col">Tentative Rec Date</th> -->
             <th scope="col">Created Date</th>
           </tr>
         </thead>
@@ -44,8 +47,10 @@ if (isset($_SESSION['userid'])) {
 
           $query = "select ORDERID,ORDERPREFIXID,SITENAME,COALESCE(CARRIERCODE,'N/A') as CARRIERCODE,
           PRODUCTCODE,HOLDFREEQTY,BALANCE,
-          PRODUCTNAME,REQUIREDQUANTITY,TENTATIVERECDATE,ORDERCREATEDON 
-          from orderedtable where ORDERCREATEDUSER='".$userid."' ORDER BY ORDERID DESC";
+          PRODUCTNAME,REQUIREDQUANTITY,ORDERCREATEDON 
+          from orderedtable where ORDERCREATEDUSER='".$userid."'
+          AND (ORDERCREATEDON between DATEADD(DAY, -40, GETDATE()) and GETDATE())
+          ORDER BY ORDERID DESC";
           $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable" => 'static')) or die(sqlsrv_errors());
           //$res = sqlsrv_fetch_array($stmt);
           
@@ -62,7 +67,7 @@ if (isset($_SESSION['userid'])) {
               <td class="num"><?php echo $res['HOLDFREEQTY']; ?></td>
               <td class="num"><?php echo $res['BALANCE'];?></td>
               <td class="num"><?php echo $res['CARRIERCODE'];?></td>
-              <td class="num"><?php echo $res['TENTATIVERECDATE']->format('Y-m-d') ?></td>
+              <!-- <td class="num"><?php //echo $res['TENTATIVERECDATE']->format('Y-m-d') ?></td> -->
               <td class="num"><?php echo $res['ORDERCREATEDON']->format('Y-m-d') ?></td>
               
             </tr>
@@ -80,6 +85,8 @@ if (isset($_SESSION['userid'])) {
         // })
   
   </script>
+  <script src="../js/chatbot.js"></script>
+
   </body>
 
   </html>

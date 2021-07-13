@@ -19,6 +19,9 @@ if (isset($_SESSION['userid'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="../css/charts.css">
+    <link rel="stylesheet" href="../css/jquery.convform.css">
+    <script src="../js/jquery.convform.js"></script>
+<!-- chat bot  -->
   </head>
   <!-- //chart work -->
   <?php
@@ -228,6 +231,10 @@ function explodePie (e) {
 
 }
 </script> -->
+
+
+
+
   <body>
     <div class="container-fluid">
     <?php 
@@ -239,40 +246,230 @@ group by c.CREDITMAX;
 ";
 $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
  $res = sqlsrv_fetch_array($stmt);
+ $availableCreditLimit = $res['Credit_Limit'] - $res['Balance'];
 
 ?>
 
 
 <form>
-<div class="form-row">
+<div class="form-row mt-5">
 <div class="form-group col-md-3">
     <label class="col-form-label">Customer Balance :</label>
-    <input type="text" class="form-control num" value="<?= number_format( $res["Balance"],2);?>" placeholder="hello" disabled>
+    <input type="text" class="form-control num" value="<?= number_format( $res["Balance"],0);?>" placeholder="hello" disabled>
 </div>
 <div class="form-group col-md-3">
     <label class="col-form-label">Customer Credit_Limit :</label>
-    <input type="text" class="form-control num" value="<?= number_format($res["Credit_Limit"],2) ;?>"  placeholder="hello" disabled>
+    <input type="text" class="form-control num" value="<?= number_format($res["Credit_Limit"],0) ;?>"  placeholder="hello" disabled>
+</div>
+<div class="form-group col-md-3">
+    <label class="col-form-label">Available Credit_Limit :</label>
+    <input type="text" class="form-control num" value="<?=number_format($availableCreditLimit,0);?>"  placeholder="hello" disabled>
+</div>
+<div class="form-group col-md-3">
+    <!-- <label class="col-form-label">Available Credit_Limit :</label> -->
+  <button type="submit" name="submit" class="btn btn-danger mt-4 ml-3 orderNow" style="margin-top: 40px !important; width: 295px !important;" id="btnorder"> <a href="./orderNow.php" class="orderBut">Order Now</a></button>
+    
 </div>
 </div>
 
-</form>
+<?php
+//HSD
+//holdsfree
+$query5 = "select SUM(HOLDFREEQTY) AS holds FROM orderedtable where PRODUCTCODE = '01' 
+AND (ORDERCREATEDON between DATEADD(DAY, -40, GETDATE()) and GETDATE())
+and ORDERCREATEDUSER = '" . $userid . "'";
+$stmt5 = sqlsrv_query($conn, $query5, array(), array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
+$result5 = sqlsrv_fetch_array($stmt5);
 
-  <div class="test"></div>
-  <div class="test2"></div>
-  <div class="test3"></div>
-  <div class="test4"></div>
+//balance
+$query6 = "select SUM(BALANCE) AS balance FROM orderedtable where PRODUCTCODE = '01' 
+AND (ORDERCREATEDON between DATEADD(DAY, -40, GETDATE()) and GETDATE())
+and ORDERCREATEDUSER = '" . $userid . "'";
+$stmt6 = sqlsrv_query($conn, $query6, array(), array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
+$result6 = sqlsrv_fetch_array($stmt6);
+
+//req quantity
+$query7 = "select SUM(REQUIREDQUANTITY) AS quantity FROM orderedtable where PRODUCTCODE = '01' 
+AND (ORDERCREATEDON between DATEADD(DAY, -40, GETDATE()) and GETDATE())
+and  ORDERCREATEDUSER = '" . $userid . "'";
+$stmt7 = sqlsrv_query($conn, $query7, array(), array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
+$result7 = sqlsrv_fetch_array($stmt7);
+
+//opened quantity
+$query11 = "select SUM(SALESQTY) AS salesqty FROM salesline where itemid = '01' 
+and CUSTACCOUNT = '" . $userid . "' 
+AND (CREATEDDATETIME between DATEADD(DAY, -40, GETDATE()) and GETDATE())
+and SALESSTATUS = 1";
+$stmt11 = sqlsrv_query($conn, $query11, array(), array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
+$result11 = sqlsrv_fetch_array($stmt11);
+
+//PMG
+//holdsfree
+$query8 = "select SUM(HOLDFREEQTY) AS holds FROM orderedtable where PRODUCTCODE = '02' 
+AND (ORDERCREATEDON between DATEADD(DAY, -40, GETDATE()) and GETDATE())
+and ORDERCREATEDUSER = '" . $userid . "'";
+$stmt8 = sqlsrv_query($conn, $query8, array(), array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
+$result8 = sqlsrv_fetch_array($stmt8);
+
+//balance
+$query9 = "select SUM(BALANCE) AS balance FROM orderedtable where PRODUCTCODE = '02' 
+AND (ORDERCREATEDON between DATEADD(DAY, -40, GETDATE()) and GETDATE())
+and ORDERCREATEDUSER = '" . $userid . "'";
+$stmt9 = sqlsrv_query($conn, $query9, array(), array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
+$result9 = sqlsrv_fetch_array($stmt9);
+
+//req quantity
+$query10 = "select SUM(REQUIREDQUANTITY) AS quantity FROM orderedtable where PRODUCTCODE = '02' 
+AND (ORDERCREATEDON between DATEADD(DAY, -40, GETDATE()) and GETDATE())
+and  ORDERCREATEDUSER = '" . $userid . "'";
+$stmt10 = sqlsrv_query($conn, $query10, array(), array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
+$result10 = sqlsrv_fetch_array($stmt10);
+
+//open quantity
+$query12 = "select SUM(SALESQTY) AS salesqty FROM salesline where itemid = '02' 
+and CUSTACCOUNT = '" . $userid . "' 
+AND (CREATEDDATETIME between DATEADD(DAY, -40, GETDATE()) and GETDATE())
+and SALESSTATUS = 1";
+$stmt12 = sqlsrv_query($conn, $query12, array(), array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
+$result12 = sqlsrv_fetch_array($stmt12);
 
 
-  <div class="chart">
-    <div id="chartContainer" style="height: 300px;"></div>  
-    <div><div id="chartContainer2" style="height: 300px;"></div>  
-    <!-- <div><h1>graph 3</h1></div> -->
 
+//HSD variables
+$HSDholds = $result5['holds'];
+$HSDbalance = $result6['balance'];
+$HSDquantity = $result7['quantity'];
+$HSDopen = $result11['salesqty'];
+
+
+
+//PMG variable
+$PMGholds = $result8['holds'];
+$PMGbalance = $result9['balance'];
+$PMGquantity = $result10['quantity'];
+$PMGopen = $result12['salesqty'];
+
+// print_r($holds.'<br>'.$balance."<br>".$quantity."<br>".$totalOrder);
+
+
+// print_r($openPer);
+// print_r($invoicePer);
+?>
+
+<!-- <h2 class="mt-5">HSD</h2> -->
+<!-- <div class="form-row mt-5">
+<div class="form-group col-md-3">
+    <label class="col-form-label"> HSD Ordered Qty :</label>
+    <input type="text" class="form-control num" value="<?= number_format($HSDquantity,0) ;?>"  placeholder="hello" disabled>
+</div>
+<div class="form-group col-md-5">
+    <label class="col-form-label">HSD Released  Qty :</label>
+    <input type="text" class="form-control num" value="<?=number_format($HSDholds,0);?>"  placeholder="hello" disabled>
+</div> -->
+<!-- <div class="form-group col-md-3">
+    <label class="col-form-label">HSD Balance Qty:</label>
+    <input type="text" class="form-control num" value="<?=number_format($HSDbalance,0);?>"  placeholder="hello" disabled>
+</div> -->
+<!-- <div class="form-group col-md-3">
+    <label class="col-form-label">HSD Opened Qty :</label>
+    <input type="text" class="form-control num" value="<?= number_format( $HSDopen,0);?>" placeholder="hello" disabled>
+</div> -->
+</div>
+
+<!-- <H2>PMG</H2> -->
+<!-- <div class="form-row mt-5">
+<div class="form-group col-md-3">
+    <label class="col-form-label">PMG Ordered Qty :</label>
+    <input type="text" class="form-control num" value="<?= number_format($PMGquantity,0) ;?>"  placeholder="hello" disabled>
+</div>
+<div class="form-group col-md-3">
+    <label class="col-form-label">PMG Released  Qty :</label>
+    <input type="text" class="form-control num" value="<?=number_format($PMGholds,0);?>"  placeholder="hello" disabled>
+</div>
+<div class="form-group col-md-3">
+    <label class="col-form-label">PMG Balance Qty:</label>
+    <input type="text" class="form-control num" value="<?=number_format($PMGbalance,0);?>"  placeholder="hello" disabled>
+</div>
+<div class="form-group col-md-3">
+    <label class="col-form-label">PMG Opened Qty :</label>
+    <input type="text" class="form-control num" value="<?= number_format( $PMGopen,0);?>" placeholder="hello" disabled>
+</div>
+</div>
+</form> -->
+
+<div class="hometable">
+  <div class="hsd">
+  <table class="table bg-white table-hover table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" class="tablehead">HSD</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row" width=55%>Ordered Qty</th>
+      <th scope ="row" class="num"><?= number_format($HSDquantity,0) ;?></th>
+    </tr>
+    <tr>
+      <th scope="row">Released Qty</th>
+      <th class="num"><?= number_format($HSDholds,0) ;?></th>
+    </tr>
+    <tr>
+      <th scope="row">Balance Qty</th>
+      <th class="num"><?= number_format($HSDbalance,0) ;?></th>
+    </tr>
+    <tr>
+      <th scope="row">Opened Qty</th>
+      <th class="num"><?= number_format($HSDopen,0) ;?></th>
+    </tr>
+  </tbody>
+</table>
   </div>
+  <div class="pmg">
+  <table class="table bg-white table-hover table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" class="tablehead">PMG</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row" width=55%>Ordered Qty</th>
+      <th class="num"><?= number_format($PMGquantity,0);?></th>
+    </tr>
+    <tr>
+      <th scope="row">Released Qty</th>
+      <th class="num"><?= number_format($PMGholds,0);?></th>
+
+    </tr>
+    <tr>
+      <th scope="row">Balance Qty</th>
+      <th class="num"><?= number_format($PMGbalance,0);?></th>
+
+    </tr>
+    <tr>
+      <th scope="row">Opened Qty</th>
+      <th class="num"><?= number_format($PMGopen,0);?></th>
+
+    </tr>
+  </tbody>
+</table>
+  </div>
+</div>
+
+
     
   </div>
   
+  <script src="../js/chatbot.js"></script>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script>
+//     $(document).ready(function(){
+//     $('.chat-icon').click(function(event){
+//       $('.chat-box').toggleClass('active');
+//     })
+// })
+</script>
 </body>
 
   </html>

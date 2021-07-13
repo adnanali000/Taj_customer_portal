@@ -34,6 +34,9 @@ include('navbar.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Change Password</title>
+    <link rel="stylesheet" href="../css/charts.css">
+    <link rel="stylesheet" href="../css/jquery.convform.css">
+    <script src="../js/jquery.convform.js"></script>
 </head>
 <style>
    #nav2{
@@ -83,6 +86,8 @@ include('navbar.php');
 </div>
 
 <script src="../js/changepassword.js"></script>
+<script src="../js/chatbot.js"></script>
+
 </body>
 <!-- <?php //}?> -->
 </html>

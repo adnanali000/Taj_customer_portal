@@ -263,6 +263,142 @@ tbody:hover{
   .svg-inline--fa{
     vertical-align: -10px !important;
   }
+  .swal2-html-container{
+      font-size: 16px !important;
+  }
+
+  /* home page order button  */
+  .orderNow:hover{
+      background-color: none !important;
+  }
+  .orderBut:hover
+{
+    text-decoration: none !important;
+    color: white !important;
+}  
+
+
+
+/* chat bot  */
+.chat-icon{
+    position: fixed;
+    right: 30px;
+    margin-right: -13px;
+    bottom: 0;
+    font-size: 30px;
+    color:#ED1C24;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+/* chat bot  */
+.chat-box{
+    position: fixed;
+    right: 20px;
+    bottom: 50px;
+    width: 320px;
+    height: 80vh;
+    background-color: #dedede;
+    z-index: 1000;
+    transition: all 0.3s ease-out;
+    transform: scaleY(0);
+}
+.chat-box.active{
+    transform: scaleY(1);
+}
+.hidden{
+    display: none !important;
+}
+
+.convo-form-wrapper textarea{
+    height: 90px;
+    overflow: hidden;
+    resize: none;
+}
+
+#messages{
+    padding: 20px;
+}
+div.conv-form-wrapper div.options div.option{
+    color: #ED1C24 !important;
+    border-color: grey !important;
+}
+div.conv-form-wrapper div#messages div.message.from{
+    background-color: #ED1C24 !important;
+}
+form.convFormDynamic button.submit{
+    color: #ED1C24 !important;
+}
+form.convFormDynamic button.submit:hover{
+    color: white !important;
+    background-color: red !important;
+}
+div.conv-form-wrapper:before{
+    /* background-color: Red !important; */
+    height: 50px !important;
+    background-image: none !important;
+    
+}
+.chat-box{
+    height: 75vh !important;
+}
+
+.wrapper-messages{
+    max-height: 400.469px !important;
+}
+
+/* home tabel  */
+.hometable{
+    margin-top: 20px;
+    /* border: 1px solid black; */
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.hsd{
+    height: 253px;
+    border: 1px solid black;
+    width: 35%;
+    margin: 5px;
+    margin-left: 20px;
+    /* padding: 20px; */
+    border: 1px solid white;
+    /* width: 29%; */
+    /* margin:auto; */
+    /* margin-top: 7%; */
+    /* height: 330px; */
+    /* border-radius: 3px; */
+    box-shadow: 2px 2px 4px 2px gray;
+}
+.pmg{
+    height: 253px;
+    /* border: 1px solid black; */
+    width: 35%;
+    margin: 5px;
+    margin-left: 25px;
+    border: 1px solid white;
+    box-shadow: 2px 2px 4px 2px gray;
+
+
+}
+.tablehead{
+    /* text-align: center; */
+    border-top: none !important;
+    border-right: none !important;
+    font-size: 20px !important;
+    text-align: right;
+    /* margin-left: 20px !important; */
+}
+
+/* home order but  */
+/* .orderNow{
+    margin-top: 80px !important; 
+    width: 295px !important;
+} */
+
+
+
 
   /* media query  */
   @media screen and (max-width:600px){
@@ -314,5 +450,19 @@ tbody:hover{
      .dropdown-item svg{
         margin-left: 10px !important;
     }
-
+    .orderNow{
+        width: 120px !important;
+        height: 40px;
+    }
+    .hometable{
+        flex-direction: column !important;
+    }
+    .hsd,.pmg{
+        margin: 10px !important;
+        height: 253px !important;
+        width: 250px;
+    }
+    .chat-box{
+        width: 200px !important;
+    }
   }

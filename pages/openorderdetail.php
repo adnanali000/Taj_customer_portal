@@ -32,6 +32,9 @@ if( isset($_GET['salesid'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Order Detail</title>
+    <link rel="stylesheet" href="../css/charts.css">
+    <link rel="stylesheet" href="../css/jquery.convform.css">
+    <script src="../js/jquery.convform.js"></script>
 </head>
 <style>
     #nav2{
@@ -208,6 +211,8 @@ if( isset($_GET['salesid'])){
         }
 
     </script>
+  <script src="../js/chatbot.js"></script>
+
 </body>
 <?php }?>
 </html>

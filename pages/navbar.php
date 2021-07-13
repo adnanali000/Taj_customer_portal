@@ -48,6 +48,8 @@ if (isset($_SESSION['userid']) && $_SESSION['userRole'] == 0 ) {
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
     <link rel="manifest" href="../site.webmanifest">
+    <link rel="stylesheet" href="../css/jquery.convform.css">
+    <script src="../js/jquery.convform.js"></script>
     <link rel="stylesheet" href="../assets/fontawesome-free-5.15.3-web/css/all.css">
     <!-- <link rel="stylesheet" href="../assets/font-awesome-4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="../assets/bootstrap-4.3.1-dist/css/bootstrap.min.css">
@@ -116,6 +118,8 @@ group by c.CREDITMAX;
 ";
         $stmt = sqlsrv_query($conn, $query, array(), array("Scrollable"=>'static')) or DIE(sqlsrv_errors());
         $res = sqlsrv_fetch_array($stmt);
+         $availableCreditLimit = $res['Credit_Limit'] - $res['Balance'];
+
         // print_r(number_format($res['Balance'],2));
      ?>
 
@@ -145,8 +149,12 @@ group by c.CREDITMAX;
                 <a class="dropdown-item" href="./orderNow.php"><i class="fas fa-angle-right" style='font-size:16px;color:red;'></i>Order Now</a>
                 <a class="dropdown-item" href="./orderdetail.php"><i class="fas fa-angle-right" style='font-size:16px;color:red;'></i>Purchase Order</a>
 
-
               </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link ml-1 dropdown-toggle text-black" href="./orderNow.php" id="navbarDropdown" role="button" >
+                Order Now
+              </a>
             </li>
             <li class="nav-item dropdown">
               
@@ -196,11 +204,74 @@ $toDate = date('Y-m-d'); // [Format : month-date-Year]
                 Customer Balance
               </a>
             </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link ml-1 dropdown-toggle text-black"  id="balance"  target="_blank" id="navbarDropdown" role="button">
+                News
+              </a>
+            </li>
           </ul>
         </div>
       </nav>
-    </div>
+      
 
+
+
+      <!-- chat bot  -->
+
+<div class="chat-icon">
+  <i class="fas fa-comments" aria-hidden="true"> </i>
+</div>
+
+<!-- chat box  -->
+<div class="chat-box">
+<div class="conv-form-wrapper">
+  <form action="" method="GET" class="hidden">
+  <select name="category" data-conv-question="May I help you?">
+	<option value="hsd">HSD ?</option>
+	<option value="pmg">PMG ?</option>
+</select>
+<div data-conv-fork="category">
+	<div data-conv-case="hsd">
+	 	<input type="text" name="site" data-conv-question="Tell me your site Name.">
+	</div>
+  <div data-conv-case="pmg">
+	 	<input type="text" name="site" data-conv-question="Tell me your site Name.">
+	</div>
+</div>
+<input type="text" name="name" data-conv-question="Tell me your Name.">
+<input data-conv-question="Type in your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" id="email" type="email" name="email" required placeholder="What's your e-mail?">
+<input type="text" name="sitename" data-conv-question="Write your complain.">
+<select data-conv-question="Confirm ?">
+	<option value="confirm">Confirm</option>
+</select>  
+<input type="text" name="name" data-conv-question="Thankyou.">
+
+
+</form>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+    <script src="../assets/js"></script>
+    <script src="../js/chatbot.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="../assets/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
@@ -231,7 +302,7 @@ $toDate = date('Y-m-d'); // [Format : month-date-Year]
     
       let balance = document.getElementById('balance');
       balance.addEventListener("click",function(){ 
-          Swal.fire({html:'Balance:  <?= number_format( $res["Balance"],2);?> <br><br>  Credit Limit: <?= number_format( $res["Credit_Limit"],2);?>',
+          Swal.fire({html:'Balance:  <?= number_format( $res["Balance"],0);?> <br><br>  Credit Limit: <?= number_format( $res["Credit_Limit"],0);?> <br><br>  Available Credit Limit: <?= number_format( $availableCreditLimit,0);?>',
                     confirmButtonText:'Close'});
       })
       

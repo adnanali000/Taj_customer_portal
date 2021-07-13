@@ -37,10 +37,10 @@ if(isset($_POST['submit'])){
 
   $dataarea = "tgpl";
   $query = "insert INTO orderedtable 
-  (OrderID,OrderCreatedOn,OrderCreatedUser,ProductCode,ProductName,RequiredQuantity,SiteName,TentativeRecDate,Unit,RECID,DATAAREAID,BALANCE)
+  (OrderID,OrderCreatedOn,OrderCreatedUser,ProductCode,ProductName,RequiredQuantity,SiteName,Unit,RECID,DATAAREAID,BALANCE)
   VALUES 
-  (?,?,?,?,?,?,?,?,?,?,?,?); select @@IDENTITY AS id; "; 
-          $params = array(&$newInsertedId,&$date,&$userid,&$productCode,&$productName,&$quantity,&$site,&$recDate,&$UoM,&$newrecid,&$dataarea,&$balance);
+  (?,?,?,?,?,?,?,?,?,?,?); select @@IDENTITY AS id; "; 
+          $params = array(&$newInsertedId,&$date,&$userid,&$productCode,&$productName,&$quantity,&$site,&$UoM,&$newrecid,&$dataarea,&$balance);
           $stmt = sqlsrv_prepare($conn, $query, $params);
 
           if (sqlsrv_execute( $stmt ) === false) {
@@ -89,6 +89,11 @@ if ( isset($_SESSION['userid']) && isset($_SESSION['customersite']) ) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Now</title>
+    <link rel="stylesheet" href="../css/charts.css">
+    <link rel="stylesheet" href="../css/jquery.convform.css">
+    <script src="../js/jquery.convform.js"></script>
+
+
 
     <style>
     #order{
@@ -138,7 +143,7 @@ if ( isset($_SESSION['userid']) && isset($_SESSION['customersite']) ) {
      })    
          
          </script> -->
-
+<script src="../js/chatbot.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script type="text/javascript">
     $(document).ready(function(){
@@ -157,6 +162,8 @@ if ( isset($_SESSION['userid']) && isset($_SESSION['customersite']) ) {
             
             
         }); 
+
+        
     })  
 
 </script>
@@ -188,7 +195,7 @@ if ( isset($_SESSION['userid']) && isset($_SESSION['customersite']) ) {
     <label for="code" class="form-label">Product Code</label>
     <input type="text" class="form-control" id="code" name="productcode" placeholder="product code" required>
   </div> -->
-  <div class="form-group">
+  <div class="form-group" style="margin-left: 10px !important;">
   <label for="code" class="form-label">Product Code:</label>
   <select class="form-control" name="ddl-productcode" id="code">
   <option disabled value="-1" selected>-- Select Product --</option>
@@ -211,23 +218,22 @@ if ( isset($_SESSION['userid']) && isset($_SESSION['customersite']) ) {
     <label for="site" class="form-label">UoM:</label>
     <input type="text" class="form-control" id="litre" name="litre" value="Litres" required readonly>
   </div>
-  <div class="col-md-6 mt-4">
+  <!-- <div class="col-md-6 mt-4">
     <label for="code" class="form-label">Tentative Recieve Date:</label>
     <input type="date" class="form-control" id="recdate" name="recdate" required placeholder="product code">
-  </div>
+  </div> -->
  
  
-  <div class="col-12">
-    <button type="submit" name="submit" class="btn btn-danger mt-4 ml-3" id="btnorder">Order Now</button>
+  <div class="col-md-6 mt-4">
+    <button type="submit" name="submit" class="btn btn-danger mt-4 ml-3" style="margin-top: 33px !important;width:300px !important" id="btnorder">Order Now</button>
   </div>
 </form>
 
 
     </div>
 
-    
+  <script src="../js/actionorder.js"></script>
 
-    <script src="../js/actionorder.js"></script>
   </body>
 
   </html>

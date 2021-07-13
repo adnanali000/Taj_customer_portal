@@ -122,7 +122,7 @@
 	
 			<div class="message" id="info">
 				<h3>COMING TO YOUR  CITY SOON</h3>
-				<button><a href="https://tajgasoline.com/" target="_blank" style="color: white;"> Learn more </a></button>
+				<button><a href="https://tajgasoline.com/customers#Experience" target="_blank" style="color: white;"> Learn more </a></button>
 			</div>
 			<div class="formbut"  onclick="hide()">
 				<button id="loginbtn">Login</button>

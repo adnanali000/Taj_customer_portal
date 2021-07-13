@@ -218,12 +218,12 @@ $toDate = date('Y-m-d'); // [Format : month-date-Year]
 
       <!-- chat bot  -->
 
-<div class="chat-icon">
+<!-- <div class="chat-icon">
   <i class="fas fa-comments" aria-hidden="true"> </i>
-</div>
+</div> -->
 
 <!-- chat box  -->
-<div class="chat-box">
+<!-- <div class="chat-box">
 <div class="conv-form-wrapper">
   <form action="" method="GET" class="hidden">
   <select name="category" data-conv-question="May I help you?">
@@ -249,26 +249,28 @@ $toDate = date('Y-m-d'); // [Format : month-date-Year]
 
 </form>
 </div>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
 
     <script src="../assets/js"></script>
     <script src="../js/chatbot.js"></script>
@@ -312,6 +314,19 @@ $toDate = date('Y-m-d'); // [Format : month-date-Year]
       
   
     </script>
+    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/60ed3a75d6e7610a49aafde6/1fafaonge';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
   </body>
 
   </html>

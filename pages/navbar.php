@@ -176,7 +176,7 @@ $toDate = date('Y-m-d'); // [Format : month-date-Year]
 
 
 
-<form id="LedgerReport" action="http://192.168.0.44/ReportServer/Pages/ReportViewer.aspx?%2fAXReports%2fpartycustomerledgernew" method="POST" target="_blank">
+<form id="LedgerReport" action="http://192.168.0.27/ReportServer/Pages/ReportViewer.aspx?%2fAXReports%2fpartycustomerledgernew" method="POST" target="_blank">
 
 <input type="hidden" name="rs:Command" value="Render" />
 

@@ -34,8 +34,9 @@ if (isset($_SESSION['userid'])) {
   <link rel="stylesheet" href="../assets/font-awesome-4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="../assets/bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/DataTables2/Buttons-1.7.1/css/buttons.bootstrap4.css">
-    <link rel="stylesheet" href="../assets/DataTables2/Buttons-1.7.1/css/buttons.dataTables.css">
+    <!-- <link rel="stylesheet" href="../assets/DataTables2/Buttons-1.7.1/css/buttons.dataTables.css"> -->
     <link rel="stylesheet" href="../assets/DataTables2/DataTables-1.10.25/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
 
 
   </head>
@@ -242,28 +243,52 @@ while ($res = sqlsrv_fetch_array($stmt)) {
 
       </div>
 		</div>
-
+    
+    <!-- jquery cdn  -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <!-- <script src="../adminPanel/sidebar-01/js/jquery.min.js"></script> -->
-    <script src="../adminPanel/sidebar-01/js/popper.js"></script>
+    
+    <!-- Admin pannel js  -->
+    <script src="../adminPanel/sidebar-01/js/popper.js"></script>    
     <script src="../adminPanel/sidebar-01/js/bootstrap.min.js"></script>
     <script src="../adminPanel/sidebar-01/js/main.js"></script>
-    <script src="../assets/DataTables2/Buttons-1.7.1/js/dataTables.buttons.js"></script>
+
+    <!-- data table  -->
     <script src="../assets/DataTables2/DataTables-1.10.25/js/jquery.dataTables.min.js"></script>
-    <script src="../assets/DataTables2/Buttons-1.7.1/js/buttons.dataTables.js"></script>
+    <script src="../assets/DataTables2/Buttons-1.7.1/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+   
+    <!-- buttons  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+    <!-- <script src="../assets/DataTables2/Buttons-1.7.1/js/buttons.dataTables.js"></script> -->
+
+    <!-- bootstrap js  -->
     <script src="../assets/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    
+    <!-- sweetalert  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- admin js  -->
     <script src="../js/admin.js"></script>
+    
+
 
     <script>
       $(document).ready(function() {
         $("#tab").DataTable({
+           dom:'Bfrtip',
+          buttons:[
+            'pageLength','excel'
+          ],
           language: {
             search: "",
             searchPlaceholder: "Search...",
             lengthMenu:     "Show _MENU_ Entries"
           },
-          "ordering": false
+          "ordering": false,
           
         });
       
